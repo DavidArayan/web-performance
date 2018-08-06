@@ -1,5 +1,6 @@
-CC	= g++
-CFLAGS	= -O2
+CC	= emcc
+OUTPT	= dct.html
+CFLAGS	= -O3
 LDFLAGS	= -lm
 LINT	= lint
 PRINT	= ato2ps -Ple
@@ -32,7 +33,7 @@ OBJS 	=\
 TEXT	= Makefile README $(INCS) $(SRC) 
 
 dct	: $(OBJS)
-	$(CC) -o $@ $(CFLAGS) $(OBJS) $(LDFLAGS)
+	$(CC) -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)
 
 lint	: $(SRC) $(INCS)
 	$(LINT) $(SRC)
