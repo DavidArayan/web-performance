@@ -1,4 +1,4 @@
-CC	= emcc
+CC	= em++
 OUTPT	= dct.html
 CFLAGS	= -O3
 LDFLAGS	= -lm
@@ -33,7 +33,7 @@ OBJS 	=\
 TEXT	= Makefile README $(INCS) $(SRC) 
 
 dct	: $(OBJS)
-	$(CC) -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)
+	$(CC) -s WASM=0 -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)
 
 lint	: $(SRC) $(INCS)
 	$(LINT) $(SRC)

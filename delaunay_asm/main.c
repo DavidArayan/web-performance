@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
 static void triangulate(char exp, int rep, cardinal n, char *params)
 {
   edge *l_cw, *r_ccw;
-  index i;
+  uindex i;
   point **p_sorted, **p_temp;
 #ifdef TIME
 #ifdef BSD

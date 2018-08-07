@@ -1,4 +1,4 @@
-CC	= emcc
+CC	= em++
 OUTPT	= dct.html
 CFLAGS	= -O3
 LDFLAGS	= -lm
