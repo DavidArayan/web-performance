@@ -33,7 +33,7 @@ OBJS 	=\
 TEXT	= Makefile README $(INCS) $(SRC) 
 
 dct	: $(OBJS)
-	$(CC) -s WASM=1 -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)
+	$(CC) -s WASM=1 --emrun -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)
 
 lint	: $(SRC) $(INCS)
 	$(LINT) $(SRC)

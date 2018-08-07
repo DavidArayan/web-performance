@@ -19,3 +19,12 @@ find . -type f -name '*.js' -delete
 find . -type f -name '*.mem' -delete
 cd ../
 rm -rf delaunay_wasm_build
+
+cd delaunay_original
+find . -type f -name '*.o' -delete
+find . -type f -name '*.html' -delete
+find . -type f -name '*.wasm' -delete
+find . -type f -name '*.js' -delete
+find . -type f -name '*.mem' -delete
+cd ../
+rm -rf delaunay_original_build

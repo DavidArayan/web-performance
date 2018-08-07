@@ -21,4 +21,6 @@
  *   These notices must be retained in any copies of any part of this software.
  */
 
-extern point *p_array;
+extern "C" {
+	extern point *p_array;
+}
