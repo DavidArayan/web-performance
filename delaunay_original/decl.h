@@ -21,31 +21,33 @@
  *   These notices must be retained in any copies of any part of this software.
  */
 
-/* divide_and_conquer.c */
-void divide(point *p_sorted[], index l, index r, edge **l_ccw, edge **r_cw);
+extern "C" {
+	/* divide_and_conquer.c */
+	void divide(point *p_sorted[], uindex l, uindex r, edge **l_ccw, edge **r_cw);
 
-/* edge.c */
-edge *join(edge *a, point *u, edge *b, point *v, side s);
-void delete_edge(edge *e);
-void splice(edge *a, edge *b, point *v);
-edge *make_edge(point *u, point *v);
+	/* edge.c */
+	edge *join(edge *a, point *u, edge *b, point *v, side s);
+	void delete_edge(edge *e);
+	void splice(edge *a, edge *b, point *v);
+	edge *make_edge(point *u, point *v);
 
-/* error.c */
-void panic(char *m);
+	/* error.c */
+	void panic(char *m);
 
-/* i_o.c */
-void get_points(char exp, int rep, cardinal n, char *params);
-void print_results(cardinal n, char o);
-void mystod(char *s, int *v, char **p);
-void mystrtof(char *s, real *v, char **p);
+	/* i_o.c */
+	void get_points(char exp, int rep, cardinal n, char *params);
+	void print_results(cardinal n, char o);
+	void mystod(char *s, int *v, char **p);
+	void mystrtof(char *s, real *v, char **p);
 
-/* memory.c */
-void alloc_memory(cardinal n);
-void free_memory();
-edge *get_edge();
-void free_edge(edge *e);
+	/* memory.c */
+	void alloc_memory(cardinal n);
+	void free_memory();
+	edge *get_edge();
+	void free_edge(edge *e);
 
-/* sort.c */
-void merge_sort(point *p[], point *p_temp[], index l, index r);
-void std_sort_ptr(point *p[], index l, index r);
-void std_sort(point p[], index l, index r);
+	/* sort.c */
+	void merge_sort(point *p[], point *p_temp[], uindex l, uindex r);
+	void std_sort_ptr(point *p[], uindex l, uindex r);
+	void std_sort(point p[], uindex l, uindex r);
+}

@@ -24,165 +24,167 @@
 #include  <stdio.h>
 #include  <stdlib.h>
 
-#include  "defs.h"
-#include  "decl.h"
-#include  "extern.h"
-#include  "edge.h"
+extern "C" {
+  #include  "defs.h"
+  #include  "decl.h"
+  #include  "extern.h"
+  #include  "edge.h"
 
-#define  MAX_RANDOM  RAND_MAX
-#define PI  3.14159265358979323846
+  #define  MAX_RANDOM  RAND_MAX
+  #define PI  3.14159265358979323846
 
 
-static void print_edges(cardinal n);
-static void print_triangles(cardinal n);
+  static void print_edges(cardinal n);
+  static void print_triangles(cardinal n);
 
-static void get_unit_square_points(cardinal np);
-static void read_points(cardinal np);
+  static void get_unit_square_points(cardinal np);
+  static void read_points(cardinal np);
 
-int seeds[10] = {
-  17,  
-  190813,
-  21,
-  23491,
-  901712,
-  6712827,
-  8776190,
-  910129,
-  232875,
-  1109117,
-};
+  int seeds[10] = {
+    17,  
+    190813,
+    21,
+    23491,
+    901712,
+    6712827,
+    8776190,
+    910129,
+    232875,
+    1109117,
+  };
 
-void get_points(char exp, int rep, cardinal np, char *params)
-{
-  srandom(seeds[rep]);
-
-  switch (exp) {
-  case 'a' :
-    get_unit_square_points(np);
-    break;
-  case 'r' :
-    read_points(np);
-    break;
-  default :
-    printf("Unknown experiment\n");
-    exit(1);
-  }
-}
-
-static void get_unit_square_points(cardinal np)
-{
-  index i;
-  point p;
-
-  for (i = 0; i < np; i++)
+  void get_points(char exp, int rep, cardinal np, char *params)
   {
-    p.x = (ordinate)random() / MAX_RANDOM;
-    p.y = (ordinate)random() / MAX_RANDOM;
+    srandom(seeds[rep]);
 
-    p_array[i].x = p.x;
-    p_array[i].y = p.y;
+    switch (exp) {
+    case 'a' :
+      get_unit_square_points(np);
+      break;
+    case 'r' :
+      read_points(np);
+      break;
+    default :
+      printf("Unknown experiment\n");
+      exit(1);
+    }
   }
-}
 
-void read_points(cardinal np)
-{
-  index i;
+  static void get_unit_square_points(cardinal np)
+  {
+    uindex i;
+    point p;
 
-  for (i = 0; i < np; i++)
-    if (scanf("%f %f", &p_array[i].x, &p_array[i].y) != 2)
-	panic("Error reading points\n");
-}
-
-/*
- * Driver function.
- */
-void print_results(cardinal n, char o)
-{
-  /* Output edges or triangles. */
-  if (o == 't')
-    print_triangles(n);
-  else
-    print_edges(n);
-}
-
-/* 
- *  Print the ring of edges about each vertex.
- */
-static void print_edges(cardinal n)
-{
-  edge *e_start, *e;
-  point *u, *v;
-  index i;
-
-  for (i = 0; i < n; i++) {
-    u = &p_array[i];
-    e_start = e = u->entry_pt;
-    do
+    for (i = 0; i < np; i++)
     {
-      v = Other_point(e, u);
-      if (u < v)
-	if (printf("%ld %ld\n", u - p_array, v - p_array) == EOF)
-	  panic("Error printing results\n");
-      e = Next(e, u);
-    } while (!Identical_refs(e, e_start));
+      p.x = (ordinate)random() / MAX_RANDOM;
+      p.y = (ordinate)random() / MAX_RANDOM;
+
+      p_array[i].x = p.x;
+      p_array[i].y = p.y;
+    }
   }
-}
 
-/* 
- *  Print the ring of triangles about each vertex.
- */
-static void print_triangles(cardinal n)
-{
-  edge *e_start, *e, *next;
-  point *u, *v, *w;
-  index i;
-  point *t;
+  void read_points(cardinal np)
+  {
+    uindex i;
 
-  for (i = 0; i < n; i++) {
-    u = &p_array[i];
-    e_start = e = u->entry_pt;
-    do
-    {
-      v = Other_point(e, u);
-      if (u < v) {
-	next = Next(e, u);
-	w = Other_point(next, u);
-	if (u < w)
-	  if (Identical_refs(Next(next, w), Prev(e, v))) {  
-	    /* Triangle. */
-	    if (v > w) { t = v; v = w; w = t; }
-	    if (printf("%ld %ld %ld\n", u - p_array, v - p_array, w - p_array) == EOF)
-	      panic("Error printing results\n");
-	  }
+    for (i = 0; i < np; i++)
+      if (scanf("%f %f", &p_array[i].x, &p_array[i].y) != 2)
+    panic("Error reading points\n");
+  }
+
+  /*
+   * Driver function.
+   */
+  void print_results(cardinal n, char o)
+  {
+    /* Output edges or triangles. */
+    if (o == 't')
+      print_triangles(n);
+    else
+      print_edges(n);
+  }
+
+  /* 
+   *  Print the ring of edges about each vertex.
+   */
+  static void print_edges(cardinal n)
+  {
+    edge *e_start, *e;
+    point *u, *v;
+    uindex i;
+
+    for (i = 0; i < n; i++) {
+      u = &p_array[i];
+      e_start = e = u->entry_pt;
+      do
+      {
+        v = Other_point(e, u);
+        if (u < v)
+    if (printf("%ld %ld\n", u - p_array, v - p_array) == EOF)
+      panic("Error printing results\n");
+        e = Next(e, u);
+      } while (!Identical_refs(e, e_start));
+    }
+  }
+
+  /* 
+   *  Print the ring of triangles about each vertex.
+   */
+  static void print_triangles(cardinal n)
+  {
+    edge *e_start, *e, *next;
+    point *u, *v, *w;
+    uindex i;
+    point *t;
+
+    for (i = 0; i < n; i++) {
+      u = &p_array[i];
+      e_start = e = u->entry_pt;
+      do
+      {
+        v = Other_point(e, u);
+        if (u < v) {
+    next = Next(e, u);
+    w = Other_point(next, u);
+    if (u < w)
+      if (Identical_refs(Next(next, w), Prev(e, v))) {  
+        /* Triangle. */
+        if (v > w) { t = v; v = w; w = t; }
+        if (printf("%ld %ld %ld\n", u - p_array, v - p_array, w - p_array) == EOF)
+          panic("Error printing results\n");
       }
+        }
 
-      /* Next edge around u. */
-      e = Next(e, u);
-    } while (!Identical_refs(e, e_start));
+        /* Next edge around u. */
+        e = Next(e, u);
+      } while (!Identical_refs(e, e_start));
+    }
   }
-}
 
-void mystod(char *s, int *v, char **p)
-{
-        int i, n;
+  void mystod(char *s, int *v, char **p)
+  {
+          int i, n;
 
-        n = 0;
-        for (i = 0; s[i] >= '0' && s[i] <= '9'; ++i)
-                n = 10 * n + s[i] - '0';
+          n = 0;
+          for (i = 0; s[i] >= '0' && s[i] <= '9'; ++i)
+                  n = 10 * n + s[i] - '0';
 
-        *p = s + i;
-        *v = n;
-}
+          *p = s + i;
+          *v = n;
+  }
 
-void mystrtof(char *s, real *v, char **p)
-{
-        int i;
-  real n;
+  void mystrtof(char *s, real *v, char **p)
+  {
+          int i;
+    real n;
 
-        n = 0;
-        for (i = 0; s[i] >= '0' && s[i] <= '9'; ++i)
-                n = 10 * n + s[i] - '0';
+          n = 0;
+          for (i = 0; s[i] >= '0' && s[i] <= '9'; ++i)
+                  n = 10 * n + s[i] - '0';
 
-        *p = s + i;
-        *v = n;
+          *p = s + i;
+          *v = n;
+  }
 }

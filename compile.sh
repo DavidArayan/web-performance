@@ -18,12 +18,12 @@ cd ../
 mkdir ${PROJECT_BUILD}
 
 # copy our generated/compiled files
-cp ${PROJECT}/${PROJECT_VARIANT}.html ${PROJECT_BUILD}/${PROJECT_VARIANT}.html
-cp ${PROJECT}/${PROJECT_VARIANT}.html.mem ${PROJECT_BUILD}/${PROJECT_VARIANT}.html.mem
-cp ${PROJECT}/${PROJECT_VARIANT}.js ${PROJECT_BUILD}/${PROJECT_VARIANT}.js
+cp -f ${PROJECT}/${PROJECT_VARIANT}.html ${PROJECT_BUILD}/${PROJECT_VARIANT}.html
+cp -f ${PROJECT}/${PROJECT_VARIANT}.html.mem ${PROJECT_BUILD}/${PROJECT_VARIANT}.html.mem
+cp -f ${PROJECT}/${PROJECT_VARIANT}.js ${PROJECT_BUILD}/${PROJECT_VARIANT}.js
 
 # copy our runner
-cp runner.sh ${PROJECT_BUILD}/run.sh
+cp -f runner.sh ${PROJECT_BUILD}/run.sh
 # -------------------------------------------------------------------------
 
 # COMPILE OUR WASM VARIANT OF THE CODE
@@ -39,12 +39,12 @@ cd ../
 mkdir ${PROJECT_BUILD}
 
 # copy our generated/compiled files
-cp ${PROJECT}/${PROJECT_VARIANT}.html ${PROJECT_BUILD}/${PROJECT_VARIANT}.html
-cp ${PROJECT}/${PROJECT_VARIANT}.wasm ${PROJECT_BUILD}/${PROJECT_VARIANT}.wasm
-cp ${PROJECT}/${PROJECT_VARIANT}.js ${PROJECT_BUILD}/${PROJECT_VARIANT}.js
+cp -f ${PROJECT}/${PROJECT_VARIANT}.html ${PROJECT_BUILD}/${PROJECT_VARIANT}.html
+cp -f ${PROJECT}/${PROJECT_VARIANT}.wasm ${PROJECT_BUILD}/${PROJECT_VARIANT}.wasm
+cp -f ${PROJECT}/${PROJECT_VARIANT}.js ${PROJECT_BUILD}/${PROJECT_VARIANT}.js
 
 # copy our runner
-cp runner.sh ${PROJECT_BUILD}/run.sh
+cp -f runner.sh ${PROJECT_BUILD}/run.sh
 # -------------------------------------------------------------------------
 
 # COMPILE OUR ORIGINAL CODE
@@ -55,6 +55,8 @@ PROJECT_BUILD=${PROJECT}"_build"
 cd ${PROJECT}
 yes | sudo make ${PROJECT_VARIANT}
 cd ../
+
+cp -f ${PROJECT}/${PROJECT_VARIANT} ${PROJECT_BUILD}/${PROJECT_VARIANT}
 
 # create our required directory if it doesn't exist
 mkdir ${PROJECT_BUILD}
