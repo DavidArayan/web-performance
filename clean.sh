@@ -8,6 +8,7 @@ find . -type f -name '*.html' -delete
 find . -type f -name '*.wasm' -delete
 find . -type f -name '*.js' -delete
 find . -type f -name '*.mem' -delete
+find . -type f -name '*.map' -delete
 cd ../
 rm -rf delaunay_asm_build
 
@@ -17,6 +18,7 @@ find . -type f -name '*.html' -delete
 find . -type f -name '*.wasm' -delete
 find . -type f -name '*.js' -delete
 find . -type f -name '*.mem' -delete
+find . -type f -name '*.map' -delete
 cd ../
 rm -rf delaunay_wasm_build
 

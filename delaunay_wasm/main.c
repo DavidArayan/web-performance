@@ -20,32 +20,32 @@
  *
  *   These notices must be retained in any copies of any part of this software.
  */
-
 #ifdef __EMSCRIPTEN__
-#include <emscripten.h>
+  #include <emscripten.h>
 #endif
 
 #include  <stdio.h>
 #include  <stdlib.h>
-#define BSD
-#define TIME
-#ifdef TIME
-#ifdef BSD
-#include        <sys/time.h>
-#include        <sys/resource.h>
-#endif
-#ifdef SYSV
-#include        <sys/types.h>
-#include        <sys/times.h>
-#include        <sys/param.h>
-#endif
-#endif
-
 
 #include  "defs.h"
 #include  "decl.h"
 #include  "extern.h"
 #include  "edge.h"
+
+#ifdef TIME
+  #ifdef BSD
+    #include        <sys/time.h>
+    #include        <sys/resource.h>
+  #endif
+  #ifdef SYSV
+    #include        <sys/types.h>
+    #include        <sys/times.h>
+    #include        <sys/param.h>
+  #endif
+  #ifdef EMTIME
+    #include        <time.h>
+  #endif
+#endif
 
 extern "C" {
   static void triangulate(char exp, int rep, cardinal n, char *params);
@@ -81,42 +81,55 @@ extern "C" {
 
   static void triangulate(char exp, int rep, cardinal n, char *params)
   {
+    printf("Running Triangulate!\n");
     edge *l_cw, *r_ccw;
     uindex i;
     point **p_sorted, **p_temp;
-  #ifdef TIME
-  #ifdef BSD
-    struct rusage r_s, r_f;
-    getrusage(RUSAGE_SELF, &r_s);
-  #endif
-  #ifdef SYSV
-    struct tms t_s, t_f;
-    times(&t_s);
-  #endif
-  #endif
+    #ifdef TIME
+      #ifdef BSD
+        struct rusage r_s, r_f;
+        getrusage(RUSAGE_SELF, &r_s);
+      #endif
+      #ifdef SYSV
+        struct tms t_s, t_f;
+        times(&t_s);
+      #endif
+      #ifdef EMTIME
+        // initialize variables
+        clock_t begin = clock();
+        clock_t end = clock();
+        double time_spent = 0.0;
+      #endif
+    #endif
 
     alloc_memory(n);
 
     get_points(exp, rep, n, params);
 
-  #ifdef TIME
-  #ifdef BSD
-    getrusage(RUSAGE_SELF, &r_f);
-    printf("utime %ld %ld stime %ld %ld \n", 
-           r_f.ru_utime.tv_sec-r_s.ru_utime.tv_sec,
-           r_f.ru_utime.tv_usec-r_s.ru_utime.tv_usec,
-           r_f.ru_stime.tv_sec-r_s.ru_stime.tv_sec,
-           r_f.ru_stime.tv_usec-r_s.ru_stime.tv_usec);
-    r_s = r_f;
-  #endif
-  #ifdef SYSV
-    times(&t_f);
-    printf("utime %ld stime %ld\n", 
-     (t_f.tms_utime-t_s.tms_utime)/CLK_TCK,
-     (t_f.tms_stime-t_s.tms_stime)/CLK_TCK);
-    t_s = t_f;
-  #endif
-  #endif
+    #ifdef TIME
+      #ifdef BSD
+        getrusage(RUSAGE_SELF, &r_f);
+        printf("utime %ld %ld stime %ld %ld \n", 
+               r_f.ru_utime.tv_sec-r_s.ru_utime.tv_sec,
+               r_f.ru_utime.tv_usec-r_s.ru_utime.tv_usec,
+               r_f.ru_stime.tv_sec-r_s.ru_stime.tv_sec,
+               r_f.ru_stime.tv_usec-r_s.ru_stime.tv_usec);
+        r_s = r_f;
+      #endif
+      #ifdef SYSV
+        times(&t_f);
+        printf("utime %ld stime %ld\n", 
+         (t_f.tms_utime-t_s.tms_utime)/CLK_TCK,
+         (t_f.tms_stime-t_s.tms_stime)/CLK_TCK);
+        t_s = t_f;
+      #endif
+      #ifdef EMTIME
+        end = clock();
+        time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
+        printf("time (parsing) %f ms\n", time_spent);
+        begin = clock();
+      #endif
+    #endif
     
     /* Initialise entry edge pointers. */
     for (i = 0; i < n; i++)
@@ -148,22 +161,28 @@ extern "C" {
   #endif
 
   #ifdef TIME
-  #ifdef BSD
-    getrusage(RUSAGE_SELF, &r_f);
-    printf("utime %ld %ld stime %ld %ld \n", 
-           r_f.ru_utime.tv_sec-r_s.ru_utime.tv_sec,
-           r_f.ru_utime.tv_usec-r_s.ru_utime.tv_usec,
-           r_f.ru_stime.tv_sec-r_s.ru_stime.tv_sec,
-           r_f.ru_stime.tv_usec-r_s.ru_stime.tv_usec);
-    r_s = r_f;
-  #endif
-  #ifdef SYSV
-    times(&t_f);
-    printf("utime %ld stime %ld\n", 
-     (t_f.tms_utime-t_s.tms_utime)/CLK_TCK,
-     (t_f.tms_stime-t_s.tms_stime)/CLK_TCK);
-    t_s = t_f;
-  #endif
+    #ifdef BSD
+      getrusage(RUSAGE_SELF, &r_f);
+      printf("utime %ld %ld stime %ld %ld \n", 
+             r_f.ru_utime.tv_sec-r_s.ru_utime.tv_sec,
+             r_f.ru_utime.tv_usec-r_s.ru_utime.tv_usec,
+             r_f.ru_stime.tv_sec-r_s.ru_stime.tv_sec,
+             r_f.ru_stime.tv_usec-r_s.ru_stime.tv_usec);
+      r_s = r_f;
+    #endif
+    #ifdef SYSV
+      times(&t_f);
+      printf("utime %ld stime %ld\n", 
+       (t_f.tms_utime-t_s.tms_utime)/CLK_TCK,
+       (t_f.tms_stime-t_s.tms_stime)/CLK_TCK);
+      t_s = t_f;
+    #endif
+    #ifdef EMTIME
+      end = clock();
+      time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
+      printf("time (sort) %f ms\n", time_spent);
+      begin = clock();
+    #endif
   #endif
     
 
@@ -171,70 +190,88 @@ extern "C" {
     divide(p_sorted, 0, n-1, &l_cw, &r_ccw);
 
   #ifdef TIME
-  #ifdef BSD
-    getrusage(RUSAGE_SELF, &r_f);
-    printf("utime %ld %ld stime %ld %ld \n", 
-           r_f.ru_utime.tv_sec-r_s.ru_utime.tv_sec,
-           r_f.ru_utime.tv_usec-r_s.ru_utime.tv_usec,
-           r_f.ru_stime.tv_sec-r_s.ru_stime.tv_sec,
-           r_f.ru_stime.tv_usec-r_s.ru_stime.tv_usec);
-    r_s = r_f;
-  #endif
-  #ifdef SYSV
-    times(&t_f);
-    printf("utime %ld stime %ld\n", 
-     (t_f.tms_utime-t_s.tms_utime)/CLK_TCK,
-     (t_f.tms_stime-t_s.tms_stime)/CLK_TCK);
-    t_s = t_f;
-  #endif
+    #ifdef BSD
+      getrusage(RUSAGE_SELF, &r_f);
+      printf("utime %ld %ld stime %ld %ld \n", 
+             r_f.ru_utime.tv_sec-r_s.ru_utime.tv_sec,
+             r_f.ru_utime.tv_usec-r_s.ru_utime.tv_usec,
+             r_f.ru_stime.tv_sec-r_s.ru_stime.tv_sec,
+             r_f.ru_stime.tv_usec-r_s.ru_stime.tv_usec);
+      r_s = r_f;
+    #endif
+    #ifdef SYSV
+      times(&t_f);
+      printf("utime %ld stime %ld\n", 
+       (t_f.tms_utime-t_s.tms_utime)/CLK_TCK,
+       (t_f.tms_stime-t_s.tms_stime)/CLK_TCK);
+      t_s = t_f;
+    #endif
+    #ifdef EMTIME
+      end = clock();
+      time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
+      printf("time (triangulate) %f ms\n", time_spent);
+      begin = clock();
+    #endif
   #endif
     
-  #define OUTPUT
-  #undef OUTPUT
   #ifdef OUTPUT
     print_results(n, 'e');
   #endif
 
   #ifdef TIME
-  #ifdef BSD
-    getrusage(RUSAGE_SELF, &r_f);
-    printf("utime %ld %ld stime %ld %ld \n", 
-           r_f.ru_utime.tv_sec-r_s.ru_utime.tv_sec,
-           r_f.ru_utime.tv_usec-r_s.ru_utime.tv_usec,
-           r_f.ru_stime.tv_sec-r_s.ru_stime.tv_sec,
-           r_f.ru_stime.tv_usec-r_s.ru_stime.tv_usec);
-    r_s = r_f;
-  #endif
-  #ifdef SYSV
-    times(&t_f);
-    printf("utime %ld stime %ld\n", 
-     (t_f.tms_utime-t_s.tms_utime)/CLK_TCK,
-     (t_f.tms_stime-t_s.tms_stime)/CLK_TCK);
-    t_s = t_f;
-  #endif
+    #ifdef BSD
+      getrusage(RUSAGE_SELF, &r_f);
+      printf("utime %ld %ld stime %ld %ld \n", 
+             r_f.ru_utime.tv_sec-r_s.ru_utime.tv_sec,
+             r_f.ru_utime.tv_usec-r_s.ru_utime.tv_usec,
+             r_f.ru_stime.tv_sec-r_s.ru_stime.tv_sec,
+             r_f.ru_stime.tv_usec-r_s.ru_stime.tv_usec);
+      r_s = r_f;
+    #endif
+    #ifdef SYSV
+      times(&t_f);
+      printf("utime %ld stime %ld\n", 
+       (t_f.tms_utime-t_s.tms_utime)/CLK_TCK,
+       (t_f.tms_stime-t_s.tms_stime)/CLK_TCK);
+      t_s = t_f;
+    #endif
+    #ifdef EMTIME
+      end = clock();
+      time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
+      printf("time (print result) %f ms\n", time_spent);
+      begin = clock();
+    #endif
   #endif
     
     free((char *)p_sorted);
     free_memory();
 
   #ifdef TIME
-  #ifdef BSD
-    getrusage(RUSAGE_SELF, &r_f);
-    printf("utime %ld %ld stime %ld %ld \n", 
-           r_f.ru_utime.tv_sec,
-           r_f.ru_utime.tv_usec,
-           r_f.ru_stime.tv_sec,
-           r_f.ru_stime.tv_usec);
-    r_s = r_f;
+    #ifdef BSD
+      getrusage(RUSAGE_SELF, &r_f);
+      printf("utime %ld %ld stime %ld %ld \n", 
+             r_f.ru_utime.tv_sec,
+             r_f.ru_utime.tv_usec,
+             r_f.ru_stime.tv_sec,
+             r_f.ru_stime.tv_usec);
+      r_s = r_f;
+    #endif
+    #ifdef SYSV
+      times(&t_f);
+      printf("utime %ld stime %ld\n", 
+             (t_f.tms_utime)/CLK_TCK,
+             (t_f.tms_stime)/CLK_TCK);
+      t_s = t_f;
+    #endif
+    #ifdef EMTIME
+      end = clock();
+      time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
+      printf("time (memory clean) %f ms\n", time_spent);
+      begin = clock();
+    #endif
   #endif
-  #ifdef SYSV
-    times(&t_f);
-    printf("utime %ld stime %ld\n", 
-           (t_f.tms_utime)/CLK_TCK,
-           (t_f.tms_stime)/CLK_TCK);
-    t_s = t_f;
-  #endif
-  #endif
+
+    printf("Finishing Triangulate!\n");
 
     exit(EXIT_SUCCESS);
   }

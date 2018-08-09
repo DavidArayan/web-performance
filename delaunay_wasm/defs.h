@@ -22,9 +22,11 @@
  */
 
 extern "C" {
-	#define BSD
-	#define OUTPUT
+	//#define BSD
+	//#define OUTPUT
 	#define TIME
+	// EMTIME is an EMSCRIPTEN friendly timer for ASM.js and WASM
+	#define EMTIME
 
 	#ifndef NULL
 	#define  NULL  0
