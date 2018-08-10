@@ -1,2 +1,8 @@
 
 \.DS_Store
+
+delaunay_wasm_build/
+
+delaunay_original_build/
+
+delaunay_asm_build/
