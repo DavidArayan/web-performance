@@ -28,6 +28,16 @@ cp -f ${PROJECT}/${PROJECT_VARIANT}.js ${PROJECT_BUILD}/${PROJECT_VARIANT}.js
 
 # copy our runner
 cp -f runner.sh ${PROJECT_BUILD}/run.sh
+
+# perform cleanup
+cd ${PROJECT}
+find . -type f -name '*.o' -delete
+find . -type f -name '*.html' -delete
+find . -type f -name '*.wasm' -delete
+find . -type f -name '*.js' -delete
+find . -type f -name '*.mem' -delete
+find . -type f -name '*.map' -delete
+cd ../
 # -------------------------------------------------------------------------
 
 # COMPILE OUR WASM VARIANT OF THE CODE
@@ -49,6 +59,16 @@ cp -f ${PROJECT}/${PROJECT_VARIANT}.js ${PROJECT_BUILD}/${PROJECT_VARIANT}.js
 
 # copy our runner
 cp -f runner.sh ${PROJECT_BUILD}/run.sh
+
+# perform cleanup
+cd ${PROJECT}
+find . -type f -name '*.o' -delete
+find . -type f -name '*.html' -delete
+find . -type f -name '*.wasm' -delete
+find . -type f -name '*.js' -delete
+find . -type f -name '*.mem' -delete
+find . -type f -name '*.map' -delete
+cd ../
 # -------------------------------------------------------------------------
 
 # COMPILE OUR ORIGINAL CODE
@@ -65,6 +85,8 @@ mkdir ${PROJECT_BUILD}
 
 cp -f ${PROJECT}/${PROJECT_VARIANT} ${PROJECT_BUILD}/${PROJECT_VARIANT}
 
-# create our required directory if it doesn't exist
-mkdir ${PROJECT_BUILD}
+cd ${PROJECT}
+find . -type f -name '*.o' -delete
+rm -rf dct
+cd ../
 # -------------------------------------------------------------------------
