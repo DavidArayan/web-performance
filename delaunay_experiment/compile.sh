@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Set our EMSDK Environment Variables
-source ./../../emscripten/emsdk/emsdk_env.sh
+source ./../emscripten/emsdk/emsdk_env.sh
 
 # perform cleanup
 source ./clean.sh
