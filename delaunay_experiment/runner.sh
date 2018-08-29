@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Set our EMSDK Environment Variables
 #source ./../../../emscripten/emsdk/emsdk_env.sh

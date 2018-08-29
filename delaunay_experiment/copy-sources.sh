@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # copy all the sources from the original folder
 # to the destination (target) folder

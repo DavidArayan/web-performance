@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Set our EMSDK Environment Variables
 source ./../emscripten/emsdk/emsdk_env.sh
@@ -15,7 +15,7 @@ PROJECT="delaunay_asm"
 PROJECT_BUILD=${PROJECT}"_build"
 
 cd ${PROJECT}
-yes | sudo emmake make ${PROJECT_VARIANT}
+emmake make ${PROJECT_VARIANT}
 cd ../
 
 # create our required directory if it doesn't exist
@@ -37,7 +37,7 @@ PROJECT="delaunay_wasm"
 PROJECT_BUILD=${PROJECT}"_build"
 
 cd ${PROJECT}
-yes | sudo emmake make ${PROJECT_VARIANT}
+emmake make ${PROJECT_VARIANT}
 cd ../
 
 # create our required directory if it doesn't exist
@@ -58,7 +58,7 @@ PROJECT="delaunay_original"
 PROJECT_BUILD=${PROJECT}"_build"
 
 cd ${PROJECT}
-yes | sudo make ${PROJECT_VARIANT}
+make ${PROJECT_VARIANT}
 cd ../
 
 # create our required directory if it doesn't exist

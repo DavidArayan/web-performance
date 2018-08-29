@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # remove all files with provided extension, leaving only the
 # original source files

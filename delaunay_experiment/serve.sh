@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 PROJECT=$1
 PROJECT_BUILD=${PROJECT}"_build"
