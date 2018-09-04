@@ -1,8 +1,8 @@
-#### About
+### About
 
 All **ASM.js** and **WebAssembly** targets refer to this folder for the [Emscripten SDK](https://github.com/kripken/emscripten). Please visit the [Emscripten Getting Started](https://kripken.github.io/emscripten-site/docs/getting_started/downloads.html) For detailed instructions on how to pull, compile and setup Emscripten for your specific platform.
 
-#### Instructions
+### Instructions
 
 The following instructions have been tested on **macOS High Sierra Version 10.13.6 (17G65)**. You may need to modify/rewrite the provided scripts for your specific platform.
 
