@@ -5,9 +5,15 @@ extern "C" {
 #endif
 
 #ifdef __EMSCRIPTEN__
-void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_mul(float *lhs, float *rhs, float *result)
+void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_mul(
+	float *lhs, 
+	float *rhs, 
+	float *result)
 #else
-void fmath_matrix4f_mul(float *lhs, float *rhs, float *result)
+void fmath_matrix4f_mul(
+	float *lhs, 
+	float *rhs, 
+	float *result)
 #endif
 {
 	const float a11 = lhs[0];
@@ -92,9 +98,13 @@ void fmath_matrix4f_mul(float *lhs, float *rhs, float *result)
 }
 
 #ifdef __EMSCRIPTEN__
-void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_invert(float *matrix, float *result)
+void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_invert(
+	float *matrix, 
+	float *result)
 #else
-void fmath_matrix4f_invert(float *matrix, float *result)
+void fmath_matrix4f_invert(
+	float *matrix, 
+	float *result)
 #endif
 {
 	const float n11 = matrix[0];
@@ -203,9 +213,17 @@ float fmath_matrix4f_det(float *matrix)
 }
 
 #ifdef __EMSCRIPTEN__
-void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_compose(float *position, float *orientation, float *scale, float *result)
+void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_compose(
+	float *position, 
+	float *orientation, 
+	float *scale, 
+	float *result)
 #else
-void fmath_matrix4f_compose(float *position, float *orientation, float *scale, float *result)
+void fmath_matrix4f_compose(
+	float *position, 
+	float *orientation, 
+	float *scale, 
+	float *result)
 #endif
 {
 	const float qx = orientation[0];
@@ -303,6 +321,55 @@ void fmath_matrix4f_identity(float *result)
 	result[13] = 0.0f;
 	result[14] = 0.0f;
 	result[15] = 1.0f;
+}
+
+#ifdef __EMSCRIPTEN__
+void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_perspective(
+	float *matrix, 
+	float left, 
+	float right, 
+	float top, 
+	float bottom, 
+	float near, 
+	float far)
+#else
+void fmath_matrix4f_perspective(
+	float *matrix, 
+	float left, 
+	float right, 
+	float top, 
+	float bottom, 
+	float near, 
+	float far)
+#endif
+{
+	const float x = 2.0f * near / (right - left);
+	const float y = 2.0f * near / (top - bottom);
+
+	const float a = (right + left) / (right - left);
+	const float b = (top + bottom) / (top - bottom);
+	const float c = -(far + near) / (far - near);
+	const float d = -2.0f * far * near / (far - near);
+
+	matrix[0] = x;
+	matrix[1] = 0.0f;
+	matrix[2] = 0.0f;
+	matrix[3] = 0.0f;
+
+	matrix[4] = 0.0f;
+	matrix[5] = y;
+	matrix[6] = 0.0f;
+	matrix[7] = 0.0f;
+
+	matrix[8] = a;
+	matrix[9] = b;
+	matrix[10] = c;
+	matrix[11] = -1.0f;
+
+	matrix[12] = 0.0f;
+	matrix[13] = 0.0f;
+	matrix[14] = d;
+	matrix[15] = 0.0f;
 }
 
 #ifdef __EMSCRIPTEN__

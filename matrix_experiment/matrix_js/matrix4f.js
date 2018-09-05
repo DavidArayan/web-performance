@@ -1,7 +1,7 @@
 class Matrix4f {
 
-	constructor() {
-		this.matrix = new Float32Array(16);
+	constructor(backing) {
+		this.matrix = backing || new Float32Array(16);
 
 		this.identity();
 	}
@@ -305,6 +305,40 @@ class Matrix4f {
 		const det = n11 * t11 + n21 * t12 + n31 * t13 + n41 * t14;
 
 		return det;
+	}
+
+	makePerspective(left, right, top, bottom, near, far) {
+		const matrix = this.matrix;
+
+		const x = 2.0 * near / (right - left);
+		const y = 2.0 * near / (top - bottom);
+
+		const a = (right + left) / (right - left);
+		const b = (top + bottom) / (top - bottom);
+		const c = -(far + near) / (far - near);
+		const d = -2.0 * far * near / (far - near);
+
+		matrix[0] = x;
+		matrix[1] = 0.0;
+		matrix[2] = 0.0;
+		matrix[3] = 0.0;
+
+		matrix[4] = 0.0;
+		matrix[5] = y;
+		matrix[6] = 0.0;
+		matrix[7] = 0.0;
+
+		matrix[8] = a;
+		matrix[9] = b;
+		matrix[10] = c;
+		matrix[11] = -1.0;
+
+		matrix[12] = 0.0;
+		matrix[13] = 0.0;
+		matrix[14] = d;
+		matrix[15] = 0.0;
+
+		return this;
 	}
 }
 
