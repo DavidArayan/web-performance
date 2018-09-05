@@ -1,9 +1,10 @@
+#include <stdlib.h>
 #ifdef __EMSCRIPTEN__
-#include <emscripten.h>
+	#include <emscripten.h>
 #endif
 
 #ifdef __cplusplus
-extern "C" {
+	extern "C" {
 #endif
 
 #ifdef __EMSCRIPTEN__
@@ -69,5 +70,5 @@ float fmath_matrix4f_det(float *matrix);
 #endif
 
 #ifdef __cplusplus
-}
+	}
 #endif

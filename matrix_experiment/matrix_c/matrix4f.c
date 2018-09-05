@@ -391,7 +391,7 @@ float* fmath_matrix4f_make()
 #endif
 {
 	// allocate our memory pool to hold a 4x4 matrix
-	float *matrix = malloc(16 * sizeof(float));
+	float *matrix = (float*)malloc(16 * sizeof(float));
 	// set the matrix into the identity
 	fmath_matrix4f_identity(matrix);
 
