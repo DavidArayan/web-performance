@@ -1,4 +1,6 @@
 #include <stdlib.h>
+#include <math.h>
+
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
 #endif
@@ -35,6 +37,13 @@ void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_perspective(
 	float near, 
 	float far);
 
+void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_make_perspective(
+	float *matrix, 
+	float fov, 
+	float aspect, 
+	float near, 
+	float far);
+
 float* EMSCRIPTEN_KEEPALIVE fmath_matrix4f_make();
 float EMSCRIPTEN_KEEPALIVE fmath_matrix4f_det(float *matrix);
 #else
@@ -62,6 +71,13 @@ void fmath_matrix4f_perspective(
 	float right, 
 	float top, 
 	float bottom, 
+	float near, 
+	float far);
+
+void fmath_matrix4f_make_perspective(
+	float *matrix, 
+	float fov, 
+	float aspect, 
 	float near, 
 	float far);
 

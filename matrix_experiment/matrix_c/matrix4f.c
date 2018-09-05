@@ -122,10 +122,10 @@ void fmath_matrix4f_invert(
 	const float n33 = matrix[10];
 	const float n43 = matrix[11];
 
-	const float n14 = matrix[8];
-	const float n24 = matrix[9];
-	const float n34 = matrix[10];
-	const float n44 = matrix[11];
+	const float n14 = matrix[12];
+	const float n24 = matrix[13];
+	const float n34 = matrix[14];
+	const float n44 = matrix[15];
 
 	const float t11 = n23 * n34 * n42 - n24 * n33 * n42 + n24 * n32 * n43 - n22 * n34 * n43 - n23 * n32 * n44 + n22 * n33 * n44;
 	const float t12 = n14 * n33 * n42 - n13 * n34 * n42 - n14 * n32 * n43 + n12 * n34 * n43 + n13 * n32 * n44 - n12 * n33 * n44;
@@ -370,6 +370,37 @@ void fmath_matrix4f_perspective(
 	matrix[13] = 0.0f;
 	matrix[14] = d;
 	matrix[15] = 0.0f;
+}
+
+#ifdef __EMSCRIPTEN__
+void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_make_perspective(
+	float *matrix, 
+	float fov, 
+	float aspect, 
+	float near, 
+	float far)
+#else
+void fmath_matrix4f_make_perspective(
+	float *matrix, 
+	float fov, 
+	float aspect, 
+	float near, 
+	float far)
+#endif
+{
+	const float m_top = near * (float)(tan((3.14159265358979323846 / 180.0) * 0.5 * fov));
+	const float m_height = 2.0f * m_top;
+	const float m_width = aspect * m_height;
+	const float m_left = -0.5f * m_width;
+
+	fmath_matrix4f_perspective(
+		matrix, 
+		m_left, 
+		m_left + m_width, 
+		m_top, 
+		m_top - m_height, 
+		near, 
+		far);
 }
 
 #ifdef __EMSCRIPTEN__
