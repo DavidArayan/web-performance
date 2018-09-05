@@ -9,6 +9,7 @@
 #endif
 
 #include "matrix4f.h"
+#include "rand.h"
 
 #ifdef __cplusplus
 	extern "C" {
