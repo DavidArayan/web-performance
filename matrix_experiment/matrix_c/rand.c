@@ -34,7 +34,15 @@ long EMSCRIPTEN_KEEPALIVE fmath_random_next(struct random *rand)
 long fmath_random_next(struct random *rand)
 #endif
 {
-	return 0;
+	long seed = rand->seed;
+
+	seed ^= (seed << 13);
+    seed ^= (seed >> 7);
+    seed ^= (seed << 17);
+    seed = abs(seed);
+
+    rand->seed = seed;
+	return seed;
 }
 
 #ifdef __EMSCRIPTEN__
@@ -51,7 +59,37 @@ float fmath_random_nextf(
 	float dev)
 #endif
 {
-	return 0.0f;
+	const long lmin = (long)(min * dev);
+	const long lmax = (long)(max * dev);
+	const long rand_number = fmath_random_nexti(rand, lmin, lmax);
+	const double rand_number_d = (double)(rand_number) / dev;
+
+	return (float)rand_number_d;
+}
+
+#ifdef __EMSCRIPTEN__
+long EMSCRIPTEN_KEEPALIVE fmath_random_nexti(
+	struct random *rand,
+	long min, 
+	long max)
+#else
+long fmath_random_nexti(
+	struct random *rand,
+	long min, 
+	long max)
+#endif
+{
+	if (min > max) {
+		return fmath_random_nexti(rand, max, min);
+	}
+
+	if (min == max) {
+		return min;
+	}
+
+	const long rand_num = fmath_random_next(rand);
+
+	return (rand_num % (max + 1 - min)) + min;
 }
 
 #ifdef __cplusplus

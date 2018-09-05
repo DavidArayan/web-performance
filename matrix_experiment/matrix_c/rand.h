@@ -22,6 +22,11 @@ float EMSCRIPTEN_KEEPALIVE fmath_random_nextf(
 	float min, 
 	float max, 
 	float dev);
+
+long EMSCRIPTEN_KEEPALIVE fmath_random_nexti(
+	struct random *rand,
+	long min, 
+	long max);
 #else
 struct random* fmath_random_make(long seed);
 void fmath_random_free(struct random *rand);
@@ -32,6 +37,11 @@ float fmath_random_nextf(
 	float min, 
 	float max, 
 	float dev);
+
+long fmath_random_nexti(
+	struct random *rand,
+	long min, 
+	long max);
 #endif
 
 #ifdef __cplusplus
