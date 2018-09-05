@@ -1,4 +1,5 @@
-CC = g++
+CC = em++
+OUTPT = matexp.html
 CFLAGS = -O3
 LDFLAGS	= -lm
 INCS =\
@@ -16,4 +17,4 @@ OBJS =\
 	main.o
 
 matexp : $(OBJS)
-	$(CC) -o $@ $(CFLAGS) $(OBJS) $(LDFLAGS)
+	$(CC) -s WASM=0 -s ALLOW_MEMORY_GROWTH=1 --emrun -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)

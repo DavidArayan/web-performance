@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Set our EMSDK Environment Variables
+source ./../emscripten/emsdk/emsdk_env.sh
+
+# perform cleanup
+source ./clean.sh
+source ./copy-sources.sh
+
 PROJECT_VARIANT="matexp"
 
 # COMPILE OUR ORIGINAL CODE
