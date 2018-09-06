@@ -39,6 +39,7 @@ void fmath_matrix4f_mul(
 		_mm_store_ps(&result[4 * i], row);
 	}
 #else
+	const float a44 = lhs[15];
 	const float a11 = lhs[0];
 	const float a21 = lhs[1];
 	const float a31 = lhs[2];
@@ -57,8 +58,8 @@ void fmath_matrix4f_mul(
 	const float a14 = lhs[12];
 	const float a24 = lhs[13];
 	const float a34 = lhs[14];
-	const float a44 = lhs[15];
 
+	const float b44 = rhs[15];
 	const float b11 = rhs[0];
 	const float b21 = rhs[1];
 	const float b31 = rhs[2];
@@ -77,7 +78,6 @@ void fmath_matrix4f_mul(
 	const float b14 = rhs[12];
 	const float b24 = rhs[13];
 	const float b34 = rhs[14];
-	const float b44 = rhs[15];
 
 	const float te0 = a11 * b11 + a12 * b21 + a13 * b31 + a14 * b41;
 	const float te4 = a11 * b12 + a12 * b22 + a13 * b32 + a14 * b42;
@@ -99,6 +99,7 @@ void fmath_matrix4f_mul(
 	const float te11 = a41 * b13 + a42 * b23 + a43 * b33 + a44 * b43;
 	const float te15 = a41 * b14 + a42 * b24 + a43 * b34 + a44 * b44;
 
+	result[15] = te15;
 	result[0] = te0;
 	result[1] = te1;
 	result[2] = te2;
@@ -117,7 +118,6 @@ void fmath_matrix4f_mul(
 	result[12] = te12;
 	result[13] = te13;
 	result[14] = te14;
-	result[15] = te15;
 #endif
 }
 
@@ -131,6 +131,7 @@ void fmath_matrix4f_invert(
 	float *result)
 #endif
 {
+	const float n44 = matrix[15];
 	const float n11 = matrix[0];
 	const float n21 = matrix[1];
 	const float n31 = matrix[2];
@@ -149,7 +150,6 @@ void fmath_matrix4f_invert(
 	const float n14 = matrix[12];
 	const float n24 = matrix[13];
 	const float n34 = matrix[14];
-	const float n44 = matrix[15];
 
 	const float t11 = n23 * n34 * n42 - n24 * n33 * n42 + n24 * n32 * n43 - n22 * n34 * n43 - n23 * n32 * n44 + n22 * n33 * n44;
 	const float t12 = n14 * n33 * n42 - n13 * n34 * n42 - n14 * n32 * n43 + n12 * n34 * n43 + n13 * n32 * n44 - n12 * n33 * n44;
@@ -179,6 +179,7 @@ void fmath_matrix4f_invert(
 	const float te14 = (n14 * n22 * n31 - n12 * n24 * n31 - n14 * n21 * n32 + n11 * n24 * n32 + n12 * n21 * n34 - n11 * n22 * n34) * inv_det;
 	const float te15 = (n12 * n23 * n31 - n13 * n22 * n31 + n13 * n21 * n32 - n11 * n23 * n32 - n12 * n21 * n33 + n11 * n22 * n33) * inv_det;
 
+	result[15] = te15;
 	result[0] = te0;
 	result[1] = te1;
 	result[2] = te2;
@@ -197,7 +198,6 @@ void fmath_matrix4f_invert(
 	result[12] = te12;
 	result[13] = te13;
 	result[14] = te14;
-	result[15] = te15;
 }
 
 #ifdef __EMSCRIPTEN__
@@ -206,6 +206,7 @@ float EMSCRIPTEN_KEEPALIVE fmath_matrix4f_det(float *matrix)
 float fmath_matrix4f_det(float *matrix)
 #endif
 {
+	const float n44 = matrix[15];
 	const float n11 = matrix[0];
 	const float n21 = matrix[1];
 	const float n31 = matrix[2];
@@ -224,7 +225,6 @@ float fmath_matrix4f_det(float *matrix)
 	const float n14 = matrix[12];
 	const float n24 = matrix[13];
 	const float n34 = matrix[14];
-	const float n44 = matrix[15];
 
 	const float t11 = n23 * n34 * n42 - n24 * n33 * n42 + n24 * n32 * n43 - n22 * n34 * n43 - n23 * n32 * n44 + n22 * n33 * n44;
 	const float t12 = n14 * n33 * n42 - n13 * n34 * n42 - n14 * n32 * n43 + n12 * n34 * n43 + n13 * n32 * n44 - n12 * n33 * n44;
@@ -250,18 +250,18 @@ void fmath_matrix4f_compose(
 	float *result)
 #endif
 {
+	const float qw = orientation[3];
 	const float qx = orientation[0];
 	const float qy = orientation[1];
 	const float qz = orientation[2];
-	const float qw = orientation[3];
 
+	const float pz = position[2];
 	const float px = position[0];
 	const float py = position[1];
-	const float pz = position[2];
 
+	const float sz = scale[2];
 	const float sx = scale[0];
 	const float sy = scale[1];
-	const float sz = scale[2];
 
 	const float qx2 = qx + qx;
 	const float qy2 = qy + qy;
@@ -299,6 +299,7 @@ void fmath_matrix4f_compose(
 	const float te14 = pz;
 	const float te15 = 1.0f;
 
+	result[15] = te15;
 	result[0] = te0;
 	result[1] = te1;
 	result[2] = te2;
@@ -317,7 +318,6 @@ void fmath_matrix4f_compose(
 	result[12] = te12;
 	result[13] = te13;
 	result[14] = te14;
-	result[15] = te15;
 }
 
 #ifdef __EMSCRIPTEN__
@@ -326,6 +326,7 @@ void EMSCRIPTEN_KEEPALIVE fmath_matrix4f_identity(float *result)
 void fmath_matrix4f_identity(float *result)
 #endif
 {
+	result[15] = 1.0f;
 	result[0] = 1.0f;
 	result[1] = 0.0f;
 	result[2] = 0.0f;
@@ -344,7 +345,6 @@ void fmath_matrix4f_identity(float *result)
 	result[12] = 0.0f;
 	result[13] = 0.0f;
 	result[14] = 0.0f;
-	result[15] = 1.0f;
 }
 
 #ifdef __EMSCRIPTEN__
@@ -375,6 +375,7 @@ void fmath_matrix4f_perspective(
 	const float c = -(far + near) / (far - near);
 	const float d = -2.0f * far * near / (far - near);
 
+	matrix[15] = 0.0f;
 	matrix[0] = x;
 	matrix[1] = 0.0f;
 	matrix[2] = 0.0f;
@@ -393,7 +394,6 @@ void fmath_matrix4f_perspective(
 	matrix[12] = 0.0f;
 	matrix[13] = 0.0f;
 	matrix[14] = d;
-	matrix[15] = 0.0f;
 }
 
 #ifdef __EMSCRIPTEN__

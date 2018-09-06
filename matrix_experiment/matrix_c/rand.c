@@ -12,7 +12,7 @@ struct random* fmath_random_make(long seed)
 {
 	struct random* rand = (struct random*)malloc(sizeof(struct random));
 
-	rand->seed = seed;
+	rand->seed = labs(seed);
 
 	return rand;
 }
