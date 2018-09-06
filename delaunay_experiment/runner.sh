@@ -1,3 +1,3 @@
 #!/bin/bash
 
-python ../simple_server.py
+python ../../simple_server/simple_server.py
