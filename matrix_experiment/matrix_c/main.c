@@ -17,8 +17,19 @@
 	extern "C" {
 #endif
 
-int main(int argc, char** argv) {
+int main(int argc, char *argv[]) {
 	printf("Running Program!\n");
+
+	if (argc <= 1) {
+		printf("Cannot Run. Supply some arguments!\n");
+
+		return 0;
+	}
+
+	const int iterations = atoi(argv[1]);
+
+	printf("Performing Iterations = %i \n", iterations);
+
 	// our randomness source, initialised with seed of 42
 	struct random *rand = fmath_random_make(42);
 
@@ -68,7 +79,7 @@ int main(int argc, char** argv) {
 		begin_t = clock();
 	#endif
 
-	for (int i = 0; i < 1000000; i++) {
+	for (int i = 0; i < iterations; i++) {
 		// generate new random values for our matrices to keep the variance
 		// going. Since the seed is always the same, this should yield consistent
 		// results across multiple runs
@@ -146,8 +157,8 @@ int main(int argc, char** argv) {
 			begin = clock();
 		#endif
 
-		fmath_matrix4f_compose(m_model, model_position, model_quaternion, model_scale);
-		fmath_matrix4f_compose(m_camera, camera_position, camera_quaternion, camera_scale);
+		fmath_matrix4f_compose(model_position, model_quaternion, model_scale, m_model);
+		fmath_matrix4f_compose(camera_position, camera_quaternion, camera_scale, m_camera);
 
 		#ifdef EMTIME
 			end = clock();
