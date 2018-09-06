@@ -9,6 +9,49 @@ source ./copy-sources.sh
 
 PROJECT_VARIANT="matexp"
 
+# COMPILE OUR ASM VARIANT OF THE CODE
+# -------------------------------------------------------------------------
+PROJECT="matrix_asm"
+PROJECT_BUILD=${PROJECT}"_build"
+
+cd ${PROJECT}
+emmake make ${PROJECT_VARIANT}
+cd ../
+
+# create our required directory if it doesn't exist
+mkdir ${PROJECT_BUILD}
+
+# copy our generated/compiled files
+cp -f ${PROJECT}/${PROJECT_VARIANT}.html ${PROJECT_BUILD}/${PROJECT_VARIANT}.html
+cp -f ${PROJECT}/${PROJECT_VARIANT}.html.mem ${PROJECT_BUILD}/${PROJECT_VARIANT}.html.mem
+cp -f ${PROJECT}/${PROJECT_VARIANT}.html.map ${PROJECT_BUILD}/${PROJECT_VARIANT}.html.map
+cp -f ${PROJECT}/${PROJECT_VARIANT}.js ${PROJECT_BUILD}/${PROJECT_VARIANT}.js
+
+# copy our runner
+cp -f runner.sh ${PROJECT_BUILD}/run.sh
+# -------------------------------------------------------------------------
+
+# COMPILE OUR WASM VARIANT OF THE CODE
+# -------------------------------------------------------------------------
+PROJECT="matrix_wasm"
+PROJECT_BUILD=${PROJECT}"_build"
+
+cd ${PROJECT}
+emmake make ${PROJECT_VARIANT}
+cd ../
+
+# create our required directory if it doesn't exist
+mkdir ${PROJECT_BUILD}
+
+# copy our generated/compiled files
+cp -f ${PROJECT}/${PROJECT_VARIANT}.html ${PROJECT_BUILD}/${PROJECT_VARIANT}.html
+cp -f ${PROJECT}/${PROJECT_VARIANT}.wasm ${PROJECT_BUILD}/${PROJECT_VARIANT}.wasm
+cp -f ${PROJECT}/${PROJECT_VARIANT}.js ${PROJECT_BUILD}/${PROJECT_VARIANT}.js
+
+# copy our runner
+cp -f runner.sh ${PROJECT_BUILD}/run.sh
+# -------------------------------------------------------------------------
+
 # COMPILE OUR ORIGINAL CODE
 # -------------------------------------------------------------------------
 PROJECT="matrix_c"

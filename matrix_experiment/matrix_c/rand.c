@@ -37,11 +37,11 @@ long fmath_random_next(struct random *rand)
 	long seed = rand->seed;
 
 	seed ^= (seed << 13);
-    seed ^= (seed >> 7);
-    seed ^= (seed << 17);
-    seed = labs(seed);
+	seed ^= (seed >> 7);
+	seed ^= (seed << 17);
+	seed = labs(seed);
 
-    rand->seed = seed;
+	rand->seed = seed;
 	return seed;
 }
 

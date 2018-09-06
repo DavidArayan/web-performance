@@ -123,6 +123,8 @@ int main(int argc, char *argv[]) {
 		camera_position[1] = camera_position_y;
 		camera_position[2] = camera_position_z;
 
+		// the rotations are computed in a specific way to ensure that the final quaternion
+		// is actually a valid rotational value from a mathematical sense
 		float sum = 0;
 		model_quaternion[3] = model_rot_w * 2.0f - 1.0f;
 		sum += model_quaternion[3] * model_quaternion[3];
