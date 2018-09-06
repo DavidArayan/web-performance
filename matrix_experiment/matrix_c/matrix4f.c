@@ -16,6 +16,29 @@ void fmath_matrix4f_mul(
 	float *result)
 #endif
 {
+#ifdef SIMD_MATH_ENABLED
+	__m128 row1 = _mm_load_ps(&rhs[0]);
+	__m128 row2 = _mm_load_ps(&rhs[4]);
+	__m128 row3 = _mm_load_ps(&rhs[8]);
+	__m128 row4 = _mm_load_ps(&rhs[12]);
+
+	for (int i=0; i<4; i++) {
+		__m128 brod1 = _mm_set1_ps(lhs[4 * i + 0]);
+		__m128 brod2 = _mm_set1_ps(lhs[4 * i + 1]);
+		__m128 brod3 = _mm_set1_ps(lhs[4 * i + 2]);
+		__m128 brod4 = _mm_set1_ps(lhs[4 * i + 3]);
+
+		__m128 row = _mm_add_ps(
+			_mm_add_ps(
+				_mm_mul_ps(brod1, row1),
+				_mm_mul_ps(brod2, row2)),
+			_mm_add_ps(
+				_mm_mul_ps(brod3, row3),
+				_mm_mul_ps(brod4, row4)));
+
+		_mm_store_ps(&result[4 * i], row);
+	}
+#else
 	const float a11 = lhs[0];
 	const float a21 = lhs[1];
 	const float a31 = lhs[2];
@@ -95,6 +118,7 @@ void fmath_matrix4f_mul(
 	result[13] = te13;
 	result[14] = te14;
 	result[15] = te15;
+#endif
 }
 
 #ifdef __EMSCRIPTEN__

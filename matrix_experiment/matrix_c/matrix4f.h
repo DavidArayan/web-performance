@@ -1,5 +1,12 @@
+#define SIMDMATH
+
 #include <stdlib.h>
 #include <math.h>
+
+#if defined(SIMDMATH) && !defined(__EMSCRIPTEN__)
+	#define SIMD_MATH_ENABLED
+	#include <xmmintrin.h>
+#endif
 
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
