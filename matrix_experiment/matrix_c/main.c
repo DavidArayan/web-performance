@@ -107,7 +107,7 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_randomness += ((double)(end - begin) * 1000.0 / CLOCKS_PER_SEC);
+			time_spent_randomness += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
 		#endif
 
 		// compute all our random positions, rotations for further operations
@@ -151,7 +151,7 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_randomness_assignment += ((double)(end - begin) * 1000.0 / CLOCKS_PER_SEC);
+			time_spent_randomness_assignment += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
 		#endif
 
 		// use this to re-compose all our matrices from our randomly generated data
@@ -164,7 +164,7 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_matrixcompose += ((double)(end - begin) * 1000.0 / CLOCKS_PER_SEC);
+			time_spent_matrixcompose += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
 		#endif
 
 		// use this to invert our camera matrix (from world space to screen-space)
@@ -176,7 +176,7 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_matrixinverse += ((double)(end - begin) * 1000.0 / CLOCKS_PER_SEC);
+			time_spent_matrixinverse += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
 		#endif
 
 		// perform our multiplication of the matrices
@@ -189,13 +189,13 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_matrixmul += ((double)(end - begin) * 1000.0 / CLOCKS_PER_SEC);
+			time_spent_matrixmul += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
 		#endif
 	}
 
 	#ifdef TOTALTIME
 		end_t = clock();
-		total_time = ((double)(end_t - begin_t) * 1000.0 / CLOCKS_PER_SEC);
+		total_time = ((double)(end_t - begin_t) * 1000.0 / (double)CLOCKS_PER_SEC);
 	#endif
 
 	#ifdef EMTIME
