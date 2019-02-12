@@ -9,7 +9,7 @@ SRC =\
 	main.c
 
 OBJS =\
-	main.o
+	src/main.o
 
 progc : $(OBJS)
 	$(CC) -s WASM=1 --emrun -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)

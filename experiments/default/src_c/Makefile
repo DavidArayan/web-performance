@@ -2,13 +2,13 @@ CC = g++
 CFLAGS = -O3
 LDFLAGS	= -lm
 INCS =\
-	src/main.h
+	main.h
 
 SRC =\
-	src/main.c
+	main.c
 
 OBJS =\
 	src/main.o
 
-matexp : $(OBJS)
+progc : $(OBJS)
 	$(CC) -o $@ $(CFLAGS) $(OBJS) $(LDFLAGS)

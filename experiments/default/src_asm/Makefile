@@ -3,13 +3,13 @@ OUTPT = index.html
 CFLAGS = -O3
 LDFLAGS	= -lm
 INCS =\
-	src/main.h
+	main.h
 
 SRC =\
-	src/main.c
+	main.c
 
 OBJS =\
-	main.o
+	src/main.o
 
 progc : $(OBJS)
 	$(CC) -s WASM=0 --emrun -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)
