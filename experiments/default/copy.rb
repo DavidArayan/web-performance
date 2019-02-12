@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require 'fileutils'
 
 FileUtils.copy_entry "./src", "./src_asm/src"
