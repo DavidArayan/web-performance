@@ -11,9 +11,9 @@ SRC =\
 	main.c
 
 OBJS =\
-	matrix4f.o\
-	rand.o\
-	main.o
+	src/matrix4f.o\
+	src/rand.o\
+	src/main.o
 
-matexp : $(OBJS)
+progc : $(OBJS)
 	$(CC) -o $@ $(CFLAGS) $(OBJS) $(LDFLAGS)

@@ -2,14 +2,28 @@
 
 require 'fileutils'
 
-FileUtils.mkdir_p "./compiled"
+# remove our previous compiled targets
+FileUtils.rm_rf('./compiled')
 
-# Compile, Copy, Cleanup of default folder
-system("cd default && ruby clean.rb")
-system("cd default && ruby copy.rb")
-system("cd default && ruby compile.rb")
+# grab all our directories - we need to compile all of them
+directories = Dir.entries(".").select {|f| File.directory? f}
 
-FileUtils.mkdir_p "./compiled/default"
+for i in 2..directories.length-1 do
+	cdir = directories[i]
 
-FileUtils.copy_entry "./default/asm", "./compiled/default/asm"
-FileUtils.copy_entry "./default/wasm", "./compiled/default/wasm"
+	puts "compiling code in " + cdir
+
+	FileUtils.mkdir_p "./compiled/" + cdir
+
+	system("ruby dir_clean.rb " + cdir)
+	system("ruby dir_copy.rb " + cdir)
+	system("ruby dir_compile.rb " + cdir)
+
+	# copy all our compiled targets into a single folder
+	FileUtils.copy_entry ("./" + cdir + "/asm"), ("./compiled/" + cdir + "/asm")
+	FileUtils.copy_entry ("./" + cdir + "/wasm"), ("./compiled/" + cdir + "/wasm")
+	FileUtils.copy_entry ("./" + cdir + "/js"), ("./compiled/" + cdir + "/js")
+
+	# perform final cleanup
+	system("ruby dir_clean.rb " + cdir)
+end
