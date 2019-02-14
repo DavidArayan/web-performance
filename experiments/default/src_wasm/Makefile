@@ -2,6 +2,7 @@ CC = em++
 OUTPT = index.html
 CFLAGS = -O3
 LDFLAGS	= -lm
+
 INCS =\
 	main.h
 

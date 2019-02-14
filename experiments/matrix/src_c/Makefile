@@ -1,6 +1,7 @@
 CC = g++
 CFLAGS = -O3
 LDFLAGS	= -lm
+
 INCS =\
 	matrix4f.h\
 	rand.h
