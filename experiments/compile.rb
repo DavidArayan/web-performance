@@ -8,7 +8,16 @@ FileUtils.rm_rf('./compiled')
 # grab all our directories - we need to compile all of them
 directories = Dir.entries(".").select {|f| File.directory? f}
 
-for i in 2..directories.length-1 do
+directories.delete(".")
+directories.delete("..")
+
+# print all our directories for the user
+puts "the following directories will be compiled"
+for i in 0..directories.length-1 do
+	puts directories[i]
+end
+
+for i in 0..directories.length-1 do
 	cdir = directories[i]
 
 	puts "compiling code in " + cdir
