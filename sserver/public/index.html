@@ -1,9 +1,89 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hello World!</title>
+	<title>Performance Research</title>
 </head>
 <body>
-	<p>Hello from sserver running in Docker!</p>
+	<h2 style="font-family:sans-serif;">Performance Research</h2>
+	<p style="font-family:georgian;">This simple HTML page can be used to navigate to a number of performance experiments carried out in JavaScript, WASM, ASM and C. You will need to run this page using the sserver tool to ensure that all files are served properly. If anyone would like to make this page look pretty, you are welcome to do so!</p>
+
+	<!-- SAMPLE/DEFAULT EXPERIMENT -->
+	<h4 style="font-family:sans-serif;">Sample</h4>
+	<p style="font-family:georgian;">This is a simple hello-world program compiled from C into ASM and WASM.</p>
+
+	<!-- SAMPLE/DEFAULT EXPERIMENT LINKS -->
+	<ul>
+		<li>
+			<a style="font-family:georgian;font-size: 10pt" href="./compiled/default/asm/index.html">ASM</a>
+		</li>
+		<li>
+			<a style="font-family:georgian;font-size: 10pt" href="./compiled/default/wasm/index.html">WASM</a>
+		</li>
+	</ul>
+
+	<!-- DELAUNAY TRIANGULATOR -->
+	<h4 style="font-family:sans-serif;">Delaunay Triangulator</h4>
+	<p style="font-family:georgian;">
+	The following experiment uses an original <a style="font-family:georgian;font-size: 12pt" href="https://en.wikipedia.org/wiki/Delaunay_triangulation">Delaunay Triangulator</a> code written in 1993 by <a style="font-family:georgian;font-size: 12pt" href="https://www.rmit.edu.au/contact/staff-contacts/academic-staff/l/leach-mr-geoff">Geoff Leach</a>. Small modifications to the timer functions were required to be able to compile and run using ASM.js and WASM. The large majority of the code remains unchanged from the original source.
+	</p>
+	<p style="font-family:georgian;">
+	The purpose of this experiment is to observe the computational and runtime performance between C, ASM.js and WebAssembly. For initial runtime observations, hardware requirements and software versions used visit the <a style="font-family:georgian;font-size: 12pt" href="https://github.com/DavidArayan/Performance-Research/wiki">Wiki</a>.
+	</p>
+
+	<!-- DELAUNAY TRIANGULATOR EXPERIMENT LINKS -->
+	<ul>
+		<li>
+			ASM
+			<ul>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/asm/index.html?a1000">triangulate 1000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/asm/index.html?a10000">triangulate 10,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/asm/index.html?a100000">triangulate 100,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/asm/index.html?a1000000">triangulate 1,000,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/asm/index.html?a10000000">triangulate 10,000,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/asm/index.html?a100000000">triangulate 100,000,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/asm/index.html?a1000000000">triangulate 1,000,000,000 points</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			WASM
+			<ul>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/wasm/index.html?a1000">triangulate 1000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/wasm/index.html?a10000">triangulate 10,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/wasm/index.html?a100000">triangulate 100,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/wasm/index.html?a1000000">triangulate 1,000,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/wasm/index.html?a10000000">triangulate 10,000,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/wasm/index.html?a100000000">triangulate 100,000,000 points</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/delaunay/wasm/index.html?a1000000000">triangulate 1,000,000,000 points</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
 </body>
 </html>
