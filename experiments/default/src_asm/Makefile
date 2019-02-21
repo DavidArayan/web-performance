@@ -1,5 +1,5 @@
 CC = em++
-OUTPT = index.html
+OUTPT = index.js
 CFLAGS = -O3
 LDFLAGS	= -lm
 
