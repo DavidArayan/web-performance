@@ -20,6 +20,12 @@ end
 for i in 0..directories.length-1 do
 	cdir = directories[i]
 
+	# Skip directories with an underscore
+	if cdir.start_with?('_') == true
+		puts "skipping the directory " + cdir
+		next
+	end
+
 	puts "compiling code in " + cdir
 
 	FileUtils.mkdir_p "./compiled/" + cdir

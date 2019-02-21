@@ -4,6 +4,10 @@ require 'fileutils'
 
 cdir = ARGV[0]
 
+puts "-------------------------------------------"
+puts " compiling - " + cdir + " - asm.js, wasm, c"
+puts "-------------------------------------------"
+
 puts "\n"
 puts "compiling ASM files"
 system("cd " + cdir + "/src_asm && make")
@@ -115,6 +119,4 @@ Dir.glob("./" + cdir + "/src_wasm/src/*.html") {|file|
 	FileUtils.mv(file, "./" + cdir + "/wasm")
 }
 
-puts "\n"
-puts "finished with " + cdir
 puts "\n"
