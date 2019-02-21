@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Loading the modules "glue" code in -->
+	<script src="index.js"></script>
+	<script>
+		const wmain = function wasm_main() {
+			Module.onRuntimeInitialized = _ => {
+				console.log('wasm initialised');
+			};
+		}
+
+		wmain();
+	</script>
+	<title>Performance Research WebAssembly</title>
+</head>
+<body>
+	
+</body>
+</html>

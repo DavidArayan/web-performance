@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<!-- Loading the modules "glue" code in -->
+	<script src="index.js"></script>
+	<script>
+		const amain = function asm_main() {
+			Module.onRuntimeInitialized = _ => {
+				console.log('asm initialised');
+			};
+		}
+
+		amain();
+	</script>
+	<title>Performance Research ASM</title>
+</head>
+<body>
+	
+</body>
+</html>

@@ -39,6 +39,11 @@ for i in 0..directories.length-1 do
 	FileUtils.copy_entry ("./" + cdir + "/wasm"), ("./compiled/" + cdir + "/wasm")
 	FileUtils.copy_entry ("./" + cdir + "/js"), ("./compiled/" + cdir + "/js")
 
+	# copy our templates into their respective folders
+	FileUtils.cp("./_templates/index_asm.html", "./compiled/" + cdir + "/asm/index.html");
+	FileUtils.cp("./_templates/index_wasm.html", "./compiled/" + cdir + "/wasm/index.html");
+	FileUtils.cp("./_templates/index_js.html", "./compiled/" + cdir + "/js/index.html");
+
 	# perform final cleanup
 	system("ruby dir_clean.rb " + cdir)
 end
