@@ -34,13 +34,13 @@
 	<!-- Loading the modules "glue" code in -->
 	<script src="index.js"></script>
 	<script>
-		const wmain = function wasm_main() {
+		const amain = function asm_main() {
 			Module.onRuntimeInitialized = _ => {
-				console.log('wasm initialised');
+				console.log('asm initialised');
 			};
 		}
 
-		wmain();
+		amain();
 	</script>
 	<title>Performance Research</title>
 </head>
@@ -51,7 +51,7 @@
 	
 	    This is a styled HTML page to look like an old-school terminal. 
 	    Visit the <a href="https://css-tricks.com/old-timey-terminal-styling/">Author</a> for more information.
-	    This particular HTML page is executing WebAssembly (WASM) code.
+	    This particular HTML page is executing ASM.js code.
 	
 	[PROGRAM OUTPUT]
 	</output>
