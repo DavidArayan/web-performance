@@ -1,11 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!-- Loading the modules "glue" code in -->
-	<script src="index.js"></script>
+	<style type="text/css">
+		textarea {
+			resize: none;
+			display: block;
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		h4 {
+			font-family:sans-serif;
+		}
+	</style>
 	<title>Performance Research JavaScript</title>
 </head>
 <body>
+	<h4 align="center">javascript program output</h4>
+	<textarea id="console" rows="30" cols="60" readonly disabled></textarea>
 
+	<!-- This hijacks the console.log so we can see it in html -->
+	<script>
+		(function() {
+			var capLog = console.log;
+			var txt = document.getElementById("console");
+			window._txtline = 1;
+
+			console.log = function(msg) {
+				capLog.apply(console, arguments);
+
+				txt.append(window._txtline + ". " + msg + "\n");
+
+				window._txtline++;
+			};
+		})();
+	</script>
+	<!-- Loading the modules "glue" code in -->
+	<script src="index.js"></script>
 </body>
 </html>
