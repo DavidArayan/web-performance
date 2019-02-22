@@ -14,5 +14,5 @@ RUN npm install http-server -g && \
 COPY /public /usr/src/app/sserver/public
 
 # Expose the ports we will be using
-EXPOSE {EXPOSED_PORT}/tcp
-EXPOSE {EXPOSED_PORT}/udp
+EXPOSE ${EXPOSED_PORT}/tcp
+EXPOSE ${EXPOSED_PORT}/udp
