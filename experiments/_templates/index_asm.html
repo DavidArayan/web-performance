@@ -20,6 +20,7 @@
 	<textarea id="console" rows="30" cols="60" readonly disabled></textarea>
 	<!-- This hijacks the console.log so we can see it in html -->
 	<script>
+		// hijack our textarea and use it to output our program
 		(function() {
 			var capLog = console.log;
 			var txt = document.getElementById("console");

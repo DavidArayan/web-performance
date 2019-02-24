@@ -21,6 +21,7 @@
 
 	<!-- This hijacks the console.log so we can see it in html -->
 	<script>
+		// hijack our textarea and use it to output our program
 		(function() {
 			var capLog = console.log;
 			var txt = document.getElementById("console");
@@ -34,6 +35,22 @@
 				window._txtline++;
 			};
 		})();
+
+		// url params which will be used to run the js program properly
+		function getUrlParams(search) {
+			let hashes = search.slice(search.indexOf('?') + 1).split('&');
+			let params = {}
+			hashes.map(hash => {
+				const [key, val] = hash.split('=')
+				params[key] = decodeURIComponent(val)
+			});
+
+			return params;
+		}
+
+		var paramsStr = getUrlParams(window.location.href);
+
+		window.argv = paramsStr['argv'];
 	</script>
 	<!-- Loading the modules "glue" code in -->
 	<script src="index.js"></script>

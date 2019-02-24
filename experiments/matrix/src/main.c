@@ -1,5 +1,6 @@
-//#define EMTIME
+#define EMTIME
 #define TOTALTIME
+#define TIME_PRECISION 100.0
 
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
@@ -19,6 +20,8 @@
 
 int main(int argc, char *argv[]) {
 	printf("Running Program!\n");
+	printf("Time measurement: %f\n", TIME_PRECISION);
+	printf("Time units are 1000.0 = 1ms precision");
 
 	if (argc <= 1) {
 		printf("Cannot Run. Supply some arguments!\n");
@@ -107,7 +110,7 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_randomness += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
+			time_spent_randomness += ((double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 		#endif
 
 		// compute all our random positions, rotations for further operations
@@ -151,7 +154,7 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_randomness_assignment += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
+			time_spent_randomness_assignment += ((double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 		#endif
 
 		// use this to re-compose all our matrices from our randomly generated data
@@ -164,7 +167,7 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_matrixcompose += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
+			time_spent_matrixcompose += ((double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 		#endif
 
 		// use this to invert our camera matrix (from world space to screen-space)
@@ -176,7 +179,7 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_matrixinverse += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
+			time_spent_matrixinverse += ((double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 		#endif
 
 		// perform our multiplication of the matrices
@@ -189,25 +192,25 @@ int main(int argc, char *argv[]) {
 
 		#ifdef EMTIME
 			end = clock();
-			time_spent_matrixmul += ((double)(end - begin) * 1000.0 / (double)CLOCKS_PER_SEC);
+			time_spent_matrixmul += ((double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 		#endif
 	}
 
 	#ifdef TOTALTIME
 		end_t = clock();
-		total_time = ((double)(end_t - begin_t) * 1000.0 / (double)CLOCKS_PER_SEC);
+		total_time = ((double)(end_t - begin_t) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 	#endif
 
 	#ifdef EMTIME
-		printf("randomness (total time) %f ms \n", time_spent_randomness);
-		printf("randomness assignment (total time) %f ms \n", time_spent_randomness_assignment);
-		printf("matrix compose (total time) %f ms \n", time_spent_matrixcompose);
-		printf("matrix invert (total time) %f ms \n", time_spent_matrixinverse);
-		printf("matrix multiply (total time) %f ms \n", time_spent_matrixmul);
+		printf("randomness (total time) %f \n", time_spent_randomness);
+		printf("randomness assignment (total time) %f \n", time_spent_randomness_assignment);
+		printf("matrix compose (total time) %f \n", time_spent_matrixcompose);
+		printf("matrix invert (total time) %f \n", time_spent_matrixinverse);
+		printf("matrix multiply (total time) %f \n", time_spent_matrixmul);
 	#endif
 
 	#ifdef TOTALTIME
-		printf("total time %f ms \n", total_time);
+		printf("total time %f \n", total_time);
 	#endif
 
 	fmath_matrix4f_free(m_model);
