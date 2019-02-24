@@ -1,4 +1,4 @@
-class RandXOR {
+export default class RandXOR {
 	constructor(seed) {
 		this.seed = Math.abs(seed) | 0;
 	}
@@ -39,5 +39,3 @@ class RandXOR {
 		return (rand_num % (max + 1 - min)) + min;
 	}
 }
-
-export default RandXOR;

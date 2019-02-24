@@ -1,4 +1,4 @@
-class Matrix4f {
+export default class Matrix4f {
 
 	constructor(backing) {
 		this.matrix = backing || new Float32Array(16);
@@ -341,5 +341,3 @@ class Matrix4f {
 		return this;
 	}
 }
-
-export default Matrix4f;

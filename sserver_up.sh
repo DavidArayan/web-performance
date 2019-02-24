@@ -2,6 +2,9 @@
 
 echo "Running sserver Docker Image"
 
+# bring down existing container if its running
+sh sserver_down.sh
+
 # spin our container up
 docker run -p 8080:8080 -dit --name sserver sserver:latest
 
