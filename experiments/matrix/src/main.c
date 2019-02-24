@@ -20,14 +20,15 @@
 
 int main(int argc, char *argv[]) {
 	printf("Running Program!\n");
-	printf("Time measurement: %f\n", TIME_PRECISION);
-	printf("Time units are 1000.0 = 1ms precision");
 
 	if (argc <= 1) {
 		printf("Cannot Run. Supply some arguments!\n");
 
 		return 0;
 	}
+
+	printf("Time measurement: %f\n", TIME_PRECISION);
+	printf("Time units are 1000.0 = 1ms precision\n");
 
 	const int iterations = atoi(argv[1]);
 

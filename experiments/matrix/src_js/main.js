@@ -125,7 +125,7 @@ export default class MainEXP {
 			// use this to invert our camera matrix (from world space to screen-space)
 			begin = Date.now();
 
-			fm_camera.invert(m_camera_inv);
+			m_camera.invert(m_camera_inv);
 
 			end = Date.now();
 			time_spent_matrixinverse += (end - begin);
