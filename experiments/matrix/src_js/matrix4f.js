@@ -307,7 +307,16 @@ export default class Matrix4f {
 		return det;
 	}
 
-	makePerspective(left, right, top, bottom, near, far) {
+	makePerspective(fov, aspect, near, far) {
+		const m_top = near * Math.tan((3.14159265358979323846 / 180.0) * 0.5 * fov);
+		const m_height = 2.0 * m_top;
+		const m_width = aspect * m_height;
+		const m_left = -0.5 * m_width;
+
+		return this.perspective(m_left, m_left + m_width, m_top, m_top - m_height, near, far);
+	}
+
+	perspective(left, right, top, bottom, near, far) {
 		const matrix = this.matrix;
 
 		const x = 2.0 * near / (right - left);
