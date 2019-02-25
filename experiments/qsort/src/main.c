@@ -1,12 +1,14 @@
 #define TOTALTIME
 #define TIME_PRECISION 100.0
 
-#include <iostream>
-#include <cstdlib>
-#include <climits>
+#include <stdlib.h>
 #include <stdio.h>
 #include "main.h"
 #include "rand.h"
+
+#if defined(TOTALTIME)
+	#include <time.h>
+#endif
 
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
@@ -16,6 +18,10 @@
 extern "C" {
 #endif
 
+int qsort_compare(const void * a, const void * b) {
+  return (*(int*)a - *(int*)b);
+}
+
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_KEEPALIVE
 #endif
@@ -23,7 +29,7 @@ void qsort_rand(int rand_num) {
 	// our randomness source, initialised with seed of 42
 	struct random *rand = fmath_random_make(42);
 
-	int a[rand_num] = {};
+	int* values = (int*) malloc(rand_num * sizeof(int));
 
 	#ifdef TOTALTIME
 		clock_t begin_t = clock();
@@ -36,7 +42,7 @@ void qsort_rand(int rand_num) {
 	#endif
 
 	for (int i = 0; i < rand_num; i++) {
-		a[i] = (int)fmath_random_nexti(rand, -200000, 200000);
+		values[i] = (int)fmath_random_nexti(rand, -200000, 200000);
 	}
 
 	#ifdef TOTALTIME
@@ -45,32 +51,19 @@ void qsort_rand(int rand_num) {
 		printf("assign random values time %f \n", total_time);
 	#endif
 
-    constexpr std::size_t size = sizeof a / sizeof *a;
-
-    #ifdef TOTALTIME
+	#ifdef TOTALTIME
 		begin_t = clock();
 	#endif
- 
-    std::qsort(a, size, sizeof *a, [] (const void* a, const void* b) {
-        int arg1 = *static_cast<const int*>(a);
-        int arg2 = *static_cast<const int*>(b);
- 
-        if (arg1 < arg2) {
-        	return -1;
-        }
 
-        if (arg1 > arg2) {
-        	return 1;
-        }
+	qsort(values, rand_num, sizeof(int), qsort_compare);
 
-        return 0;
-    });
-
-    #ifdef TOTALTIME
+	#ifdef TOTALTIME
 		end_t = clock();
 		total_time = ((double)(end_t - begin_t) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 		printf("qsort time %f \n", total_time);
 	#endif
+
+	free(values);
 }
 
 int main(int argc, char **argv) {
