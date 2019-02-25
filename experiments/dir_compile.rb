@@ -56,8 +56,18 @@ Dir.glob("./" + cdir + "/src_asm/src/*.html") {|file|
 }
 
 puts "\n"
-puts "copying compiled ASM files"
-puts "Copying of C Binaries will be skipped"
+puts "copying compiled C files"
+FileUtils.mkdir_p "./" + cdir + "/c"
+
+Dir.glob("./" + cdir + "/src_c/progc") {|file|
+	puts "Moving progc File #{file}"
+	FileUtils.mv(file, "./" + cdir + "/c")
+}
+
+Dir.glob("./" + cdir + "/src_c/src/progc") {|file|
+	puts "Moving progc File #{file}"
+	FileUtils.mv(file, "./" + cdir + "/c")
+}
 
 puts "\n"
 puts "copying compiled JS files"

@@ -14,9 +14,16 @@ directories.delete("..")
 # print all our directories for the user
 puts "the following directories will be compiled"
 for i in 0..directories.length-1 do
-	puts directories[i]
+	cdir = directories[i]
+
+	if cdir.start_with?('_') == true
+		next
+	end
+	
+	puts cdir
 end
 
+puts "compiling target directories"
 for i in 0..directories.length-1 do
 	cdir = directories[i]
 
@@ -37,6 +44,7 @@ for i in 0..directories.length-1 do
 	# copy all our compiled targets into a single folder
 	FileUtils.copy_entry ("./" + cdir + "/asm"), ("./compiled/" + cdir + "/asm")
 	FileUtils.copy_entry ("./" + cdir + "/wasm"), ("./compiled/" + cdir + "/wasm")
+	FileUtils.copy_entry ("./" + cdir + "/c"), ("./compiled/" + cdir + "/c")
 	FileUtils.copy_entry ("./" + cdir + "/js"), ("./compiled/" + cdir + "/js")
 
 	# copy our templates into their respective folders
