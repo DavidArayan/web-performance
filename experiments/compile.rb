@@ -19,7 +19,7 @@ for i in 0..directories.length-1 do
 	if cdir.start_with?('_') == true
 		next
 	end
-	
+
 	puts cdir
 end
 
@@ -47,11 +47,24 @@ for i in 0..directories.length-1 do
 	FileUtils.copy_entry ("./" + cdir + "/c"), ("./compiled/" + cdir + "/c")
 	FileUtils.copy_entry ("./" + cdir + "/js"), ("./compiled/" + cdir + "/js")
 
+	puts "copying template files in " + cdir
+
 	# copy our templates into their respective folders
-	FileUtils.cp("./_templates/index_asm.html", "./compiled/" + cdir + "/asm/index.html");
-	FileUtils.cp("./_templates/index_wasm.html", "./compiled/" + cdir + "/wasm/index.html");
-	FileUtils.cp("./_templates/index_js.html", "./compiled/" + cdir + "/js/index.html");
+	if File.file?("./compiled/" + cdir + "/asm/index.html") == false
+		FileUtils.cp("./_templates/index_asm.html", "./compiled/" + cdir + "/asm/index.html");
+	end
+
+	if File.file?("./compiled/" + cdir + "/wasm/index.html") == false
+		FileUtils.cp("./_templates/index_wasm.html", "./compiled/" + cdir + "/wasm/index.html");
+	end
+
+	if File.file?("./compiled/" + cdir + "/js/index.html") == false
+		FileUtils.cp("./_templates/index_js.html", "./compiled/" + cdir + "/js/index.html");
+	end
 
 	# perform final cleanup
 	system("ruby dir_clean.rb " + cdir)
 end
+
+puts "\n"
+puts "all finished! compiled files can now be copied out and service closed"
