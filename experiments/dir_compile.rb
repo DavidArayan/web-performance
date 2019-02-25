@@ -26,33 +26,33 @@ FileUtils.mkdir_p "./" + cdir + "/asm"
 
 Dir.glob("./" + cdir + "/src_asm/*.mem") {|file|
 	puts "Moving .mem File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/asm")
+	FileUtils.cp(file, "./" + cdir + "/asm")
 }
 
 Dir.glob("./" + cdir + "/src_asm/*.js") {|file|
 	puts "Moving .js File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/asm")
+	FileUtils.cp(file, "./" + cdir + "/asm")
 }
 
 Dir.glob("./" + cdir + "/src_asm/*.html") {|file|
 	puts "Moving .html File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/asm")
+	FileUtils.cp(file, "./" + cdir + "/asm")
 }
 
 # Copy the files in /src folders aswell if available
 Dir.glob("./" + cdir + "/src_asm/src/*.mem") {|file|
 	puts "Moving .mem File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/asm")
+	FileUtils.cp(file, "./" + cdir + "/asm")
 }
 
 Dir.glob("./" + cdir + "/src_asm/src/*.js") {|file|
 	puts "Moving .js File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/asm")
+	FileUtils.cp(file, "./" + cdir + "/asm")
 }
 
 Dir.glob("./" + cdir + "/src_asm/src/*.html") {|file|
 	puts "Moving .html File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/asm")
+	FileUtils.cp(file, "./" + cdir + "/asm")
 }
 
 puts "\n"
@@ -61,12 +61,12 @@ FileUtils.mkdir_p "./" + cdir + "/c"
 
 Dir.glob("./" + cdir + "/src_c/progc") {|file|
 	puts "Moving progc File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/c")
+	FileUtils.cp(file, "./" + cdir + "/c")
 }
 
 Dir.glob("./" + cdir + "/src_c/src/progc") {|file|
 	puts "Moving progc File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/c")
+	FileUtils.cp(file, "./" + cdir + "/c")
 }
 
 puts "\n"
@@ -76,22 +76,22 @@ FileUtils.mkdir_p "./" + cdir + "/js"
 
 Dir.glob("./" + cdir + "/src_js/*.js") {|file|
 	puts "Moving .js File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/js")
+	FileUtils.cp(file, "./" + cdir + "/js")
 }
 
 Dir.glob("./" + cdir + "/src_js/*.html") {|file|
 	puts "Moving .html File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/js")
+	FileUtils.cp(file, "./" + cdir + "/js")
 }
 
 Dir.glob("./" + cdir + "/src_js/src/*.js") {|file|
 	puts "Moving .js File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/js")
+	FileUtils.cp(file, "./" + cdir + "/js")
 }
 
 Dir.glob("./" + cdir + "/src_js/src/*.html") {|file|
 	puts "Moving .html File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/js")
+	FileUtils.cp(file, "./" + cdir + "/js")
 }
 
 puts "\n"
@@ -101,32 +101,32 @@ FileUtils.mkdir_p "./" + cdir + "/wasm"
 
 Dir.glob("./" + cdir + "/src_wasm/*.wasm") {|file|
 	puts "Moving .wasm File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/wasm")
+	FileUtils.cp(file, "./" + cdir + "/wasm")
 }
 
 Dir.glob("./" + cdir + "/src_wasm/*.js") {|file|
 	puts "Moving .js File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/wasm")
+	FileUtils.cp(file, "./" + cdir + "/wasm")
 }
 
 Dir.glob("./" + cdir + "/src_wasm/*.html") {|file|
 	puts "Moving .html File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/wasm")
+	FileUtils.cp(file, "./" + cdir + "/wasm")
 }
 
 Dir.glob("./" + cdir + "/src_wasm/src/*.wasm") {|file|
 	puts "Moving .wasm File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/wasm")
+	FileUtils.cp(file, "./" + cdir + "/wasm")
 }
 
 Dir.glob("./" + cdir + "/src_wasm/src/*.js") {|file|
 	puts "Moving .js File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/wasm")
+	FileUtils.cp(file, "./" + cdir + "/wasm")
 }
 
 Dir.glob("./" + cdir + "/src_wasm/src/*.html") {|file|
 	puts "Moving .html File #{file}"
-	FileUtils.mv(file, "./" + cdir + "/wasm")
+	FileUtils.cp(file, "./" + cdir + "/wasm")
 }
 
 puts "\n"
