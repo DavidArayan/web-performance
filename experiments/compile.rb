@@ -3,7 +3,7 @@
 require 'fileutils'
 
 # remove our previous compiled targets
-FileUtils.rm_rf('./compiled')
+FileUtils.rm_rf("./compiled")
 
 # grab all our directories - we need to compile all of them
 directories = Dir.entries(".").select {|f| File.directory? f}
@@ -50,16 +50,39 @@ for i in 0..directories.length-1 do
 	puts "copying template files in " + cdir
 
 	# copy our templates into their respective folders
-	if File.file?("./compiled/" + cdir + "/asm/index.html") == false
-		FileUtils.cp("./_templates/index_asm.html", "./compiled/" + cdir + "/asm/index.html");
+	# NOTE -> We delete folders which have not compiled/are empty. This can be caused
+	# due to a particular experiment not available for that target
+
+	# perform action for ASM target
+	if Dir["./compiled/" + cdir + "/asm/*"].empty? == false
+		if File.file?("./compiled/" + cdir + "/asm/index.html") == false
+			FileUtils.cp("./_templates/index_asm.html", "./compiled/" + cdir + "/asm/index.html");
+		end
+	else
+		FileUtils.rm_rf("./compiled/" + cdir + "/asm")
 	end
 
-	if File.file?("./compiled/" + cdir + "/wasm/index.html") == false
-		FileUtils.cp("./_templates/index_wasm.html", "./compiled/" + cdir + "/wasm/index.html");
+	# perform action for WASM target
+	if Dir["./compiled/" + cdir + "/wasm/*"].empty? == false
+		if File.file?("./compiled/" + cdir + "/wasm/index.html") == false
+			FileUtils.cp("./_templates/index_wasm.html", "./compiled/" + cdir + "/wasm/index.html");
+		end
+	else
+		FileUtils.rm_rf("./compiled/" + cdir + "/wasm")
 	end
 
-	if File.file?("./compiled/" + cdir + "/js/index.html") == false
-		FileUtils.cp("./_templates/index_js.html", "./compiled/" + cdir + "/js/index.html");
+	# perform action for JS target
+	if Dir["./compiled/" + cdir + "/js/*"].empty? == false
+		if File.file?("./compiled/" + cdir + "/js/index.html") == false
+			FileUtils.cp("./_templates/index_js.html", "./compiled/" + cdir + "/js/index.html");
+		end
+	else
+		FileUtils.rm_rf("./compiled/" + cdir + "/js")
+	end
+
+	# perform action for C target
+	if Dir["./compiled/" + cdir + "/c/*"].empty? == true
+		FileUtils.rm_rf("./compiled/" + cdir + "/c")
 	end
 
 	# perform final cleanup
