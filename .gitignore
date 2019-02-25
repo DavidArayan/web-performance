@@ -9,4 +9,6 @@ delaunay_asm_build/
 
 emscripten/emsdk/
 
-sserver/public/compiled/
+sserver/public/compiled/*
+
+experiments/compiled/*
