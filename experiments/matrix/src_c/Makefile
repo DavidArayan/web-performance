@@ -1,4 +1,4 @@
-CC = g++
+CC = gcc
 CFLAGS = -O3
 LDFLAGS	= -lm
 

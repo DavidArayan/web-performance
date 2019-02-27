@@ -1,4 +1,4 @@
-CC = em++
+CC = emcc
 OUTPT = index.js
 CFLAGS = -O3
 LDFLAGS	= -lm

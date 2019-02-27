@@ -21,11 +21,13 @@
  *   These notices must be retained in any copies of any part of this software.
  */
 
-#include  <stdlib.h>
+#include <stdlib.h>
+#include "defs.h"
+#include "decl.h"
 
-extern "C" {
-  #include  "defs.h"
-  #include  "decl.h"
+#ifdef __cplusplus
+	extern "C" {
+#endif
 
   point *p_array;
   static edge *e_array;
@@ -34,43 +36,46 @@ extern "C" {
 
   void alloc_memory(cardinal n)
   {
-    edge *e;
-    uindex i;
+	edge *e;
+	uindex i;
 
-    /* Point storage. */
-    p_array = (point *)calloc(n, sizeof(point));
-    if (p_array == NULL)
-      panic("Not enough memory\n");
+	/* Point storage. */
+	p_array = (point *)calloc(n, sizeof(point));
+	if (p_array == NULL)
+	  panic("Not enough memory\n");
 
-    /* Edges. */
-    n_free_e = 3 * n;   /* Eulers relation */
-    e_array = e = (edge *)calloc(n_free_e, sizeof(edge));
-    if (e_array == NULL)
-      panic("Not enough memory\n");
-    free_list_e = (edge **)calloc(n_free_e, sizeof(edge *));
-    if (free_list_e == NULL)
-      panic("Not enough memory\n");
-    for (i = 0; i < n_free_e; i++, e++)
-      free_list_e[i] = e;
+	/* Edges. */
+	n_free_e = 3 * n;   /* Eulers relation */
+	e_array = e = (edge *)calloc(n_free_e, sizeof(edge));
+	if (e_array == NULL)
+	  panic("Not enough memory\n");
+	free_list_e = (edge **)calloc(n_free_e, sizeof(edge *));
+	if (free_list_e == NULL)
+	  panic("Not enough memory\n");
+	for (i = 0; i < n_free_e; i++, e++)
+	  free_list_e[i] = e;
   }
 
   void free_memory()
   {
-    free(p_array);  
-    free(e_array);  
-    free(free_list_e);  
+	free(p_array);  
+	free(e_array);  
+	free(free_list_e);  
   }
 
   edge *get_edge()
   {
-    if (n_free_e == 0)
-      panic("Out of memory for edges\n");
+	if (n_free_e == 0)
+	  panic("Out of memory for edges\n");
 
-     return (free_list_e[--n_free_e]);
+	 return (free_list_e[--n_free_e]);
   }
 
   void free_edge(edge *e)
   {
-     free_list_e[n_free_e++] = e;
+	 free_list_e[n_free_e++] = e;
   }
-}
+
+#ifdef __cplusplus
+	}
+#endif

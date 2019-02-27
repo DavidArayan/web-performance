@@ -21,13 +21,19 @@
  *   These notices must be retained in any copies of any part of this software.
  */
 
-extern "C" {
-	#include  <stdlib.h>
-	#include  <stdio.h>
+#include <stdlib.h>
+#include <stdio.h>
 
-	void panic(char *m)
-	{
-	  (void)fprintf(stderr, "%s\n", m);
-	  exit(EXIT_FAILURE);
-	}
+#ifdef __cplusplus
+	extern "C" {
+#endif
+
+void panic(char *m)
+{
+	(void)fprintf(stderr, "%s\n", m);
+	exit(EXIT_FAILURE);
 }
+
+#ifdef __cplusplus
+	}
+#endif

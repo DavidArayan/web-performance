@@ -1,4 +1,4 @@
-CC = em++
+CC = emcc
 OUTPT = index.html
 CFLAGS = -O3
 LDFLAGS	= -lm

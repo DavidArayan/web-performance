@@ -21,6 +21,12 @@
  *   These notices must be retained in any copies of any part of this software.
  */
 
-extern "C" {
-	extern point *p_array;
-}
+#ifdef __cplusplus
+	extern "C" {
+#endif
+
+extern point *p_array;
+
+#ifdef __cplusplus
+	}
+#endif

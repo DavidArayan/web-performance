@@ -21,43 +21,50 @@
  *   These notices must be retained in any copies of any part of this software.
  */
 
-extern "C" {
-	//#define BSD
-	//#define OUTPUT
-	#define TIME
-	// EMTIME is an EMSCRIPTEN friendly timer for ASM.js and WASM
-	#define EMTIME
+#ifdef __cplusplus
+	extern "C" {
+#endif
 
-	#ifndef NULL
-	#define  NULL  0
-	#endif
-	#define  TRUE  1
-	#define  FALSE  0
+//#define BSD
+//#define OUTPUT
+#define TIME
+// EMTIME is an EMSCRIPTEN friendly timer for ASM.js and WASM
+#define EMTIME
 
-	/* Edge sides. */
-	typedef enum {right, left} side;
+#ifndef NULL
+	#define NULL  0
+#endif
 
-	/* Geometric and topological entities. */
-	typedef  unsigned int uindex;
-	typedef  unsigned int cardinal;
-	typedef  int integer;
-	typedef  float  real;
-	typedef  float  ordinate;
-	typedef  unsigned char boolean;
-	typedef  struct   point   point;
-	typedef  struct  edge  edge;
+#define TRUE 1
+#define FALSE 0
 
-	struct point {
-	  ordinate x,y;
-	  edge *entry_pt;
-	};
+/* Edge sides. */
+typedef enum {right, left} side;
 
-	struct edge {
-	  point *org;
-	  point *dest;
-	  edge *onext;
-	  edge *oprev;
-	  edge *dnext;
-	  edge *dprev;
-	};
-}
+/* Geometric and topological entities. */
+typedef  unsigned int uindex;
+typedef  unsigned int cardinal;
+typedef  int integer;
+typedef  float  real;
+typedef  float  ordinate;
+typedef  unsigned char boolean;
+typedef  struct   point   point;
+typedef  struct  edge  edge;
+
+struct point {
+	ordinate x,y;
+	edge *entry_pt;
+};
+
+struct edge {
+	point *org;
+	point *dest;
+	edge *onext;
+	edge *oprev;
+	edge *dnext;
+	edge *dprev;
+};
+
+#ifdef __cplusplus
+	}
+#endif

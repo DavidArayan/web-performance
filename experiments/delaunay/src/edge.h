@@ -21,19 +21,25 @@
  *   These notices must be retained in any copies of any part of this software.
  */
 
-extern "C" {
-	#define  Org(e)    ((e)->org)
-	#define  Dest(e)    ((e)->dest)
-	#define  Onext(e)  ((e)->onext)
-	#define  Oprev(e)  ((e)->oprev)
-	#define  Dnext(e)  ((e)->dnext)
-	#define  Dprev(e)  ((e)->dprev)
+#ifdef __cplusplus
+	extern "C" {
+#endif
 
-	#define  Other_point(e,p)  ((e)->org == p ? (e)->dest : (e)->org)
-	#define  Next(e,p)  ((e)->org == p ? (e)->onext : (e)->dnext)
-	#define  Prev(e,p)  ((e)->org == p ? (e)->oprev : (e)->dprev)
+#define  Org(e)    ((e)->org)
+#define  Dest(e)    ((e)->dest)
+#define  Onext(e)  ((e)->onext)
+#define  Oprev(e)  ((e)->oprev)
+#define  Dnext(e)  ((e)->dnext)
+#define  Dprev(e)  ((e)->dprev)
 
-	#define  Visited(p)  ((p)->f)
+#define  Other_point(e,p)  ((e)->org == p ? (e)->dest : (e)->org)
+#define  Next(e,p)  ((e)->org == p ? (e)->onext : (e)->dnext)
+#define  Prev(e,p)  ((e)->org == p ? (e)->oprev : (e)->dprev)
 
-	#define Identical_refs(e1,e2)  (e1 == e2)
-}
+#define  Visited(p)  ((p)->f)
+
+#define Identical_refs(e1,e2)  (e1 == e2)
+
+#ifdef __cplusplus
+	}
+#endif

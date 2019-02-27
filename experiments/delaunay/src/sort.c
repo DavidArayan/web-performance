@@ -22,63 +22,64 @@
  */
 
 #include <algorithm>
+#include "defs.h"
+#include "decl.h"
 
-extern "C" {
-  #include  "defs.h"
-  #include  "decl.h"
+#ifdef __cplusplus
+	extern "C" {
+#endif
 
   void merge_sort(point *p[], point *p_temp[], uindex l, uindex r)
   {
-    uindex i, j, k, m;
+	uindex i, j, k, m;
 
-    if (r - l > 0)
-    {
-      m = (r + l) / 2;
-      merge_sort(p, p_temp, l, m);
-      merge_sort(p, p_temp, m+1, r);
+	if (r - l > 0)
+	{
+	  m = (r + l) / 2;
+	  merge_sort(p, p_temp, l, m);
+	  merge_sort(p, p_temp, m+1, r);
 
-      for (i = m+1; i > l; i--)
-        p_temp[i-1] = p[i-1];
-      for (j = m; j < r; j++)
-        p_temp[r+m-j] = p[j+1];
-      for (k = l; k <= r; k++)
-        if (p_temp[i]->x < p_temp[j]->x) {
-          p[k] = p_temp[i];
-          i = i + 1;
-        } else if (p_temp[i]->x == p_temp[j]->x && p_temp[i]->y < p_temp[j]->y) {
-          p[k] = p_temp[i];
-          i = i + 1;
-        } else {
-          p[k] = p_temp[j];
-          j = j - 1;
-        }
-    }
+	  for (i = m+1; i > l; i--)
+		p_temp[i-1] = p[i-1];
+	  for (j = m; j < r; j++)
+		p_temp[r+m-j] = p[j+1];
+	  for (k = l; k <= r; k++)
+		if (p_temp[i]->x < p_temp[j]->x) {
+		  p[k] = p_temp[i];
+		  i = i + 1;
+		} else if (p_temp[i]->x == p_temp[j]->x && p_temp[i]->y < p_temp[j]->y) {
+		  p[k] = p_temp[i];
+		  i = i + 1;
+		} else {
+		  p[k] = p_temp[j];
+		  j = j - 1;
+		}
+	}
   }
 
   bool cmp(const point &p1, const point &p2)
   {
-    if (p1.x < p2.x)
-      return true;
-    else if (p1.x > p2.x)
-      return false;
-    else if (p1.y < p2.y)
-      return true;
-    else
-      return false;
+	if (p1.x < p2.x)
+	  return true;
+	else if (p1.x > p2.x)
+	  return false;
+	else if (p1.y < p2.y)
+	  return true;
+	else
+	  return false;
   }
 
   bool cmp_ptr(const point *p1, const point *p2)
   {
-    if (p1->x < p2->x)
-      return true;
-    else if (p1->x > p2->x)
-      return false;
-    else if (p1->y < p2->y)
-      return true;
-    else
-      return false;
+	if (p1->x < p2->x)
+	  return true;
+	else if (p1->x > p2->x)
+	  return false;
+	else if (p1->y < p2->y)
+	  return true;
+	else
+	  return false;
   }
-}
 
 void std_sort(point p[], uindex l, uindex r)
 {
@@ -89,3 +90,7 @@ void std_sort_ptr(point *p[], uindex l, uindex r)
 {
   std::sort(&p[l], &p[r+1], cmp_ptr);
 }
+
+#ifdef __cplusplus
+	}
+#endif
