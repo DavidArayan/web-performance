@@ -1,5 +1,5 @@
 CC = emcc
-OUTPT = index.html
+OUTPT = index.js
 CFLAGS = -O3
 LDFLAGS	= -lm
 
