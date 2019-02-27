@@ -1,5 +1,16 @@
-const progc = function progc() {
-	console.log('hello world!\n');
-}
+import MainEXP from './main.js';
 
-progc();
+window.addEventListener('DOMContentLoaded', () => {
+	(function progc() {
+		console.log('Running Program!');
+		
+		if (!window.argv) {
+			console.log('Cannot Run. Supply some arguments!');
+			return;
+		}
+
+		new MainEXP().run(parseInt(window.argv));
+
+		console.log('Finishing Program!');
+	})();
+});
