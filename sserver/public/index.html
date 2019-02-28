@@ -11,6 +11,10 @@
 	<h2 style="font-family:sans-serif;">Performance Research</h2>
 	<p style="font-family:georgian;">This simple HTML page can be used to navigate to a number of performance experiments carried out in JavaScript, WASM, ASM and C. You will need to run this page using the sserver tool to ensure that all files are served properly. If anyone would like to make this page look pretty, you are welcome to do so!</p>
 
+	<p style="font-family:georgian;">
+	The purpose of these experiments is to observe the computational and runtime performance between C, ASM.js, WebAssembly and hand written JavaScript. For initial runtime observations, hardware requirements and software versions used visit the <a style="font-family:georgian;font-size: 12pt" href="https://github.com/DavidArayan/Performance-Research/wiki">Wiki</a>.
+	</p>
+
 	<!-- SAMPLE/DEFAULT EXPERIMENT -->
 	<h4 style="font-family:sans-serif;">Sample</h4>
 	<p style="font-family:georgian;">This is a simple hello-world program compiled from C into ASM and WASM.</p>
@@ -50,9 +54,6 @@
 	</p>
 	<p style="font-family:georgian;">
 	Delaunay Triangulator is an algorithm that takes a set of 2D random points and triangulates them in such a way that all triangles are non-intersecting. It involves a large number of number comparison operators and is memory bandwidth intensive.
-	</p>
-	<p style="font-family:georgian;">
-	The purpose of this experiment is to observe the computational and runtime performance between C, ASM.js and WebAssembly. For initial runtime observations, hardware requirements and software versions used visit the <a style="font-family:georgian;font-size: 12pt" href="https://github.com/DavidArayan/Performance-Research/wiki">Wiki</a>.
 	</p>
 
 	<!-- DELAUNAY TRIANGULATOR EXPERIMENT LINKS -->
@@ -118,9 +119,6 @@
 	</p>
 	<p style="font-family:georgian;">
 	three.js is an open source javascript graphics library. This experiment uses a number of 4x4 Matrix, Vector and Quaternion operations to try and emulate a similar scenario that a typical graphics application would perform on a regular basis. These operations are typically compute heavy with minimal CPU branching operations.
-	</p>
-	<p style="font-family:georgian;">
-	The purpose of this experiment is to observe the computational and runtime performance between C, ASM.js, WebAssembly and hand written JavaScript. For initial runtime observations, hardware requirements and software versions used visit the <a style="font-family:georgian;font-size: 12pt" href="https://github.com/DavidArayan/Performance-Research/wiki">Wiki</a>.
 	</p>
 
 	<!-- MATRIX EXPERIMENT LINKS -->
@@ -208,11 +206,10 @@
 	<!-- MATRIX COMPUTATION -->
 	<h4 style="font-family:sans-serif;">Random and Sort</h4>
 	<p style="font-family:georgian;">
+	This experiment uses C's qsort and JavaScripts built in TimSort and/or MergeSort to compare the performance between different browsers against ASM.JS and WebAssembly. The reason why the code-bases are not the same is because JavaScript's sorting algorithms vary between vendors. For an apples to apples comparison, please refer to other experiments.
 	</p>
 	<p style="font-family:georgian;">
-	</p>
-	<p style="font-family:georgian;">
-	The purpose of this experiment is to observe the computational and runtime performance between C, ASM.js, WebAssembly and hand written JavaScript. For initial runtime observations, hardware requirements and software versions used visit the <a style="font-family:georgian;font-size: 12pt" href="https://github.com/DavidArayan/Performance-Research/wiki">Wiki</a>.
+	The code uses the same source of XorShift64 Random Number Generator to generate a set of random numbers and sorts them with qsort (C) or JavaScript's built in sort.
 	</p>
 
 	<!-- MATRIX EXPERIMENT LINKS -->
