@@ -21,6 +21,12 @@
  *   These notices must be retained in any copies of any part of this software.
  */
 #ifdef __EMSCRIPTEN__
+	#define TIME_PRECISION 1.0
+#else
+	#define TIME_PRECISION 1000.0
+#endif
+
+#ifdef __EMSCRIPTEN__
 	#include <emscripten.h>
 #endif
 
@@ -56,6 +62,9 @@
   int main(int argc, char** argv)
   {
 	printf("Running Program!\n");
+	printf("Time measurement: %f\n", TIME_PRECISION);
+	printf("Time units are 1000.0 = 1ms precision\n");
+
 	int i, rep_no, n_reps;
 	cardinal n;
 	char exp;
@@ -128,8 +137,8 @@
 	  #endif
 	  #ifdef EMTIME
 		end = clock();
-		time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
-		printf("time (parsing) %f ms\n", time_spent);
+		time_spent = (double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC;
+		printf("time (parsing) %f \n", time_spent);
 		begin = clock();
 	  #endif
 	#endif
@@ -182,8 +191,8 @@
 	#endif
 	#ifdef EMTIME
 	  end = clock();
-	  time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
-	  printf("time (sort) %f ms\n", time_spent);
+	  time_spent = (double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC;
+	  printf("time (sort) %f \n", time_spent);
 	  begin = clock();
 	#endif
   #endif
@@ -211,8 +220,8 @@
 	#endif
 	#ifdef EMTIME
 	  end = clock();
-	  time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
-	  printf("time (triangulate) %f ms\n", time_spent);
+	  time_spent = (double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC;
+	  printf("time (triangulate) %f \n", time_spent);
 	  begin = clock();
 	#endif
   #endif
@@ -240,8 +249,8 @@
 	#endif
 	#ifdef EMTIME
 	  end = clock();
-	  time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
-	  printf("time (print result) %f ms\n", time_spent);
+	  time_spent = (double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC;
+	  printf("time (print result) %f \n", time_spent);
 	  begin = clock();
 	#endif
   #endif
@@ -268,8 +277,8 @@
 	#endif
 	#ifdef EMTIME
 	  end = clock();
-	  time_spent = (double)(end - begin) * 1000.0 / CLOCKS_PER_SEC;
-	  printf("time (memory clean) %f ms\n", time_spent);
+	  time_spent = (double)(end - begin) * TIME_PRECISION / (double)CLOCKS_PER_SEC;
+	  printf("time (memory clean) %f \n", time_spent);
 	  begin = clock();
 	#endif
   #endif

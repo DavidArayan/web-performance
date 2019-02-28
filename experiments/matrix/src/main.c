@@ -1,6 +1,11 @@
 #define EMTIME
 #define TOTALTIME
-#define TIME_PRECISION 100.0
+
+#ifdef __EMSCRIPTEN__
+	#define TIME_PRECISION 1.0
+#else
+	#define TIME_PRECISION 1000.0
+#endif
 
 #ifdef __EMSCRIPTEN__
 	#include <emscripten.h>

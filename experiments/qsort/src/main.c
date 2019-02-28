@@ -1,5 +1,10 @@
 #define TOTALTIME
-#define TIME_PRECISION 100.0
+
+#ifdef __EMSCRIPTEN__
+	#define TIME_PRECISION 1.0
+#else
+	#define TIME_PRECISION 1000.0
+#endif
 
 #include <stdlib.h>
 #include <stdio.h>
