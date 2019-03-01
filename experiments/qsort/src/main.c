@@ -66,6 +66,7 @@ void qsort_rand(int rand_num) {
 		end_t = clock();
 		total_time = ((double)(end_t - begin_t) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 		printf("qsort time %f \n", total_time);
+		printf("access first = %i last = %i \n", values[0], values[rand_num-1]);
 	#endif
 
 	free(values);
