@@ -36,7 +36,7 @@ Running the ASM.js, WASM and JavaScript experiments. This command will host a si
 
 ```shell
 # This will bring up Simple Server container and host the experiments
-# Internally this uses NodeJS and hosts the files on port 80
+# Internally this uses NodeJS and hosts the files on port 8080
 # Existing the container using Ctrl-C
 sh sserver_up.sh
 
