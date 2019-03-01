@@ -26,10 +26,6 @@ export default class MainEXP {
 		total_time = end - begin;
 		console.log('assign random values time ' + total_time);
 
-		const cmp = function(a, b) {
-			return a - b;
-		};
-
 		begin = Date.now();
 
 		for (var i = 0; i < (rand_num * 2); i+=2) {
