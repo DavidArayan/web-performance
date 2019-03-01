@@ -69,6 +69,7 @@ void qsort_rand(int rand_num) {
 	#endif
 
 	free(values);
+	fmath_random_free(rand);
 }
 
 int main(int argc, char **argv) {
