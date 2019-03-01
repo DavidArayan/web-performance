@@ -1,7 +1,7 @@
 #define TOTALTIME
 
 #ifdef __EMSCRIPTEN__
-	#define TIME_PRECISION 1.0
+	#define TIME_PRECISION 1000.0
 #else
 	#define TIME_PRECISION 1000.0
 #endif
