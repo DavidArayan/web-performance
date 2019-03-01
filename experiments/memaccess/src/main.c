@@ -49,7 +49,7 @@ void rand_memaccess(int rand_num) {
 	}
 
 	for (int i = 0; i < rand_num; i++) {
-		source_access[i] = (int)fmath_random_nexti(rand, -200000, 200000);
+		source_access[i] = (int)fmath_random_nexti(rand, 0, 200000);
 	}
 
 	#ifdef TOTALTIME
@@ -76,6 +76,8 @@ void rand_memaccess(int rand_num) {
 		end_t = clock();
 		total_time = ((double)(end_t - begin_t) * TIME_PRECISION / (double)CLOCKS_PER_SEC);
 		printf("random memory access time %f \n", total_time);
+		printf("access first = %i last = %i \n", source_access[0], source_access[rand_num-1]);
+		printf("destination first = %i last = %i \n", destination[0], destination[rand_num-1]);
 	#endif
 
 	free(source_access);
