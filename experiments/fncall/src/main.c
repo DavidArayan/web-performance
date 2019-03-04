@@ -44,9 +44,6 @@ float calculate_det() {
 	const float model_rot_z = fmath_random_nextf(global_rand, 0.0f, 1.0f, 100000.0f);
 	const float model_rot_w = fmath_random_nextf(global_rand, 0.0f, 1.0f, 100000.0f);
 
-	//printf("%f %f %f\n", model_position_x, model_position_y, model_position_z);
-	//printf("%f %f %f %f\n", model_rot_x, model_rot_y, model_rot_z, model_rot_w);
-
 	model_position[0] = model_position_x;
 	model_position[1] = model_position_y;
 	model_position[2] = model_position_z;
