@@ -23,7 +23,81 @@
 	extern "C" {
 #endif
 
+// our global variables
+struct random *rand = NULL;
+float *m_model = NULL;
+
+#ifdef __EMSCRIPTEN__
+EMSCRIPTEN_KEEPALIVE
+#endif
+float calculate_det() {
+	float model_position[3];
+	float model_quaternion[4];
+	float model_scale[] = {100.0f, 100.0f, 100.0f};
+
+	const float model_position_x = fmath_random_nextf(rand, -2000.0f, 2000.0f, 100000.0f);
+	const float model_position_y = fmath_random_nextf(rand, -2000.0f, 2000.0f, 100000.0f);
+	const float model_position_z = fmath_random_nextf(rand, -2000.0f, 2000.0f, 100000.0f);
+
+	const float model_rot_x = fmath_random_nextf(rand, 0.0f, 1.0f, 100000.0f);
+	const float model_rot_y = fmath_random_nextf(rand, 0.0f, 1.0f, 100000.0f);
+	const float model_rot_z = fmath_random_nextf(rand, 0.0f, 1.0f, 100000.0f);
+	const float model_rot_w = fmath_random_nextf(rand, 0.0f, 1.0f, 100000.0f);
+
+	model_position[0] = model_position_x;
+	model_position[1] = model_position_y;
+	model_position[2] = model_position_z;
+
+	float sum = 0;
+	model_quaternion[3] = model_rot_w * 2.0f - 1.0f;
+	sum += model_quaternion[3] * model_quaternion[3];
+
+	model_quaternion[0] = sqrt(1.0f - sum) * (model_rot_x * 2.0f - 1.0f);
+	sum += model_quaternion[0] * model_quaternion[0];
+
+	model_quaternion[1] = sqrt(1.0f - sum) * (model_rot_y * 2.0f - 1.0f);
+	sum += model_quaternion[1] * model_quaternion[1];
+
+	model_quaternion[2] = sqrt(1.0f - sum) * (model_rot_z < 0.5f ? -1.0f : 1.0f);
+
+	fmath_matrix4f_compose(model_position, model_quaternion, model_scale, m_model);
+
+	// calculate and return the matrix determinant
+	return fmath_matrix4f_det(m_model);
+}
+
+#ifdef __EMSCRIPTEN__
+EMSCRIPTEN_KEEPALIVE
+#endif
+void free_buffers() {
+	printf("fncall - free buffers.\n");
+	fmath_matrix4f_free(m_model);
+	fmath_random_free(rand);
+}
+
+#ifdef __EMSCRIPTEN__
+EMSCRIPTEN_KEEPALIVE
+#endif
+void alloc_buffers() {
+	printf("fncall - allocated buffers.\n");
+	rand = fmath_random_make(42);
+	m_model = fmath_matrix4f_make();
+}
+
 int main(int argc, char *argv[]) {
+	#ifdef __EMSCRIPTEN__
+		// WASM/ASM.js outputs are controlled via JavaScript
+		alloc_buffers();
+	#else
+		printf("fncall experiment is designed to run only on WASM/ASM.js\n");
+		printf("below is a sample output to test functionality\n");
+
+		alloc_buffers();
+
+		printf("output = %f\n", calculate_det());
+
+		free_buffers();
+	#endif
 	return 0;
 }
 

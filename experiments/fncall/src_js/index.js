@@ -18,9 +18,9 @@ window.addEventListener('DOMContentLoaded', () => {
 		console.log('');
 		console.log('Running Program!');
 		console.log('');
+
 		// run the actual program
 		mainprogc.run(parseInt(window.argv));
-
 		console.log('Finishing Program!');
 	})();
 });
