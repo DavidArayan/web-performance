@@ -27,6 +27,7 @@
 struct random *global_rand = NULL;
 float *m_model = NULL;
 
+// https://emscripten.org/docs/porting/connecting_cpp_and_javascript/Interacting-with-code.html#interacting-with-code-direct-function-calls
 #ifdef __EMSCRIPTEN__
 EMSCRIPTEN_KEEPALIVE
 #endif

@@ -18,4 +18,4 @@ OBJS =\
 	src/main.o
 
 progc : $(OBJS)
-	$(CC) -s WASM=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='["cwrap"]' --emrun -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)
+	$(CC) -s WASM=1 --emrun -o $(OUTPT) $(CFLAGS) $(OBJS) $(LDFLAGS)

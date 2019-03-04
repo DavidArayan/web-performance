@@ -11,18 +11,23 @@ export default class MainEXP {
 	run(iterations) {
 		console.log('running iterations ' + iterations);
 		let total_time = 0.0;
+		let value = 0;
 
 		let end = Date.now();
 		let begin = Date.now();
 
 		for (var i = 0; i < iterations; i++) {
-			this.calculate_det();
+			value += this.calculate_det();
 		}
 
 		end = Date.now();
 
 		total_time = end - begin;
 		console.log('completed time ' + total_time);
+
+		// this gets printed so JIT does not get rid of
+		// our process
+		console.log('final value ' + value);
 	}
 
 	calculate_det() {
