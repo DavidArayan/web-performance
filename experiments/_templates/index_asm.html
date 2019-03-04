@@ -42,13 +42,11 @@
 	<!-- Loading the modules "glue" code in -->
 	<script src="index.js"></script>
 	<script>
-		const amain = function asm_main() {
+		(function() {
 			Module.onRuntimeInitialized = _ => {
 				console.log('asm initialised');
 			};
-		}
-
-		amain();
+		})();
 	</script>
 </body>
 </html>

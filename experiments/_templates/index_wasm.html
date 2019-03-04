@@ -42,13 +42,11 @@
 	<!-- Loading the modules "glue" code in -->
 	<script src="index.js"></script>
 	<script>
-		const wmain = function wasm_main() {
+		(function() {
 			Module.onRuntimeInitialized = _ => {
 				console.log('wasm initialised');
 			};
-		}
-
-		wmain();
+		})();
 	</script>
 </body>
 </html>
