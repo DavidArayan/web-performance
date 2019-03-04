@@ -293,5 +293,96 @@
 			</ul>
 		</li>
 	</ul>
+
+	<!-- MATRIX COMPUTATION -->
+	<h4 style="font-family:sans-serif;">Repeated Function Calls</h4>
+	<p style="font-family:georgian;">
+	This experiment repeatedly calls a WASM function which performs a computation on a random 4x4 matrix and returns its determinant as a single 32 bit float value. The purpose of this experiment is to find any significant overheads with function calls to WASM/ASM.
+	</p>
+	<p style="font-family:georgian;">
+	The code uses the same source of XorShift64 Random Number Generator to generate a set of random numbers and uses the same 4x4 matrix code to compute it's determinent.
+	</p>
+
+	<!-- MATRIX EXPERIMENT LINKS -->
+	<ul>
+		<li>
+			ASM
+			<ul>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/asm/index.html?1000">run 1000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/asm/index.html?10000">run 10,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/asm/index.html?100000">run 100,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/asm/index.html?1000000">run 1,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/asm/index.html?10000000">run 10,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/asm/index.html?100000000">run 100,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/asm/index.html?1000000000">run 1,000,000,000 function calls</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			WASM
+			<ul>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/wasm/index.html?1000">run 1000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/wasm/index.html?10000">run 10,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/wasm/index.html?100000">run 100,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/wasm/index.html?1000000">run 1,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/wasm/index.html?10000000">run 10,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/wasm/index.html?100000000">run 100,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/wasm/index.html?1000000000">run 1,000,000,000 function calls</a>
+				</li>
+			</ul>
+		</li>
+		<li>
+			JavaScript
+			<ul>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/js/index.html?argv=1000">run 1000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/js/index.html?argv=10000">run 10,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/js/index.html?argv=100000">run 100,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/js/index.html?argv=1000000">run 1,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/js/index.html?argv=10000000">run 10,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/js/index.html?argv=100000000">run 100,000,000 function calls</a>
+				</li>
+				<li>
+					<a style="font-family:georgian;font-size: 10pt" href="./compiled/fncall/js/index.html?argv=1000000000">run 1,000,000,000 function calls</a>
+				</li>
+			</ul>
+		</li>
+	</ul>
 </body>
 </html>
