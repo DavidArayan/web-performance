@@ -88,7 +88,6 @@ void alloc_buffers() {
 int main(int argc, char *argv[]) {
 	#ifdef __EMSCRIPTEN__
 		// WASM/ASM.js outputs are controlled via JavaScript
-		alloc_buffers();
 	#else
 		printf("fncall experiment is designed to run only on WASM/ASM.js\n");
 		printf("below is a sample output to test functionality\n");

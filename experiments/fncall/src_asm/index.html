@@ -57,26 +57,26 @@
 	</script>
 	<!-- Loading the modules "glue" code in -->
 	<script src="index.js"></script>
-	<script src="main.js" type="module">
-		(function() {
-			Module.onRuntimeInitialized = _ => {
-				console.log('asm initialised');
-		
-				if (!window.argv) {
-					console.log('Cannot Run. Supply some arguments!');
-					return;
-				}
+	<script type="module">
+		import MainEXP from './main.js';
 
-				const mainprogc = new MainEXP(Module);
+		Module.onRuntimeInitialized = _ => {
+			console.log('asm initialised');
+	
+			if (!window.argv) {
+				console.log('Cannot Run. Supply some arguments!');
+				return;
+			}
 
-				console.log('Running Program!');
-				console.log('');
+			const mainprogc = new MainEXP(Module);
 
-				// run the actual program
-				mainprogc.run(parseInt(window.argv));
-				console.log('Finishing Program!');
-			};
-		})();
+			console.log('Running Program!');
+			console.log('');
+
+			// run the actual program
+			mainprogc.run(parseInt(window.argv));
+			console.log('Finishing Program!');
+		};
 	</script>
 </body>
 </html>
