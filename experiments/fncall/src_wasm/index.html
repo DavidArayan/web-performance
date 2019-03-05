@@ -56,10 +56,12 @@
 		window.argv = paramsStr['argv'];
 	</script>
 	<!-- Loading the modules "glue" code in -->
-	<script src="index.js"></script>
+	<script src="index.js">
+		Module.noExitRuntime = true;
+	</script>
 	<script type="module">
 		import MainEXP from './main.js';
-
+		
 		Module.onRuntimeInitialized = _ => {
 			console.log('wasm initialised');
 	
