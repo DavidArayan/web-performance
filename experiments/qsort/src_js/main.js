@@ -32,6 +32,7 @@ export default class MainEXP {
 
 		total_time = end - begin;
 		console.log('sort time ' + total_time);
+		console.log('first value = ' + values[0] + ' last value = ' + values[numbers - 1]);
 
 		return values;
 	}

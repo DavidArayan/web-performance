@@ -28,7 +28,7 @@ export default class MainEXP {
 
 		begin = Date.now();
 
-		for (var i = 0; i < (rand_num * 2); i+=2) {
+		for (var i = 0; i < (numbers * 2); i+=2) {
 			const src_1 = source_lut[i];
 			const src_2 = source_lut[i + 1];
 
