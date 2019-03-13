@@ -2,7 +2,7 @@
 [![License](https://img.shields.io/badge/license-MIT-orange.svg?style=flat)](LICENSE)
 
 ### About
-This repository contains code and samples which are used to conduct performance research experiments in C/C++, WebAssembly, ASM.js and JavaScript. The purpose of these experiments is to observe the execution speed between native C/C++ programs against WebAssembly, ASM.js and JavaScript.
+This repository contains code and samples that are used to conduct performance research experiments in C/C++, WebAssembly, ASM.js and JavaScript. The purpose of these experiments is to observe the execution speed between native C/C++ programs against WebAssembly, ASM.js and JavaScript.
 
 ### Tool Requirements
 These tools are used to compile the code samples for the various platforms.
